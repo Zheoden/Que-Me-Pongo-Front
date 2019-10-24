@@ -37,7 +37,7 @@ export class LoginComponent {
     this.required = Boolean(this.username && this.password);
   }
 
-  onLogin(username: string,password: string) {
+  onLogin() {
     return this.apiGetwayService.validateLogin(this.username, this.password).
     toPromise().then((user: Usuario) => {
     this.user = user;
