@@ -4,11 +4,11 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
-import {UsuarioComponent} from "./usuario/usuario.component";
-import {ApiGetwayService} from "./apiGetway/apiGetway.service";
-import {AuthService} from "../authenticator/auth.service";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {UsuarioComponent} from './usuario/usuario.component';
+import {ApiGetwayService} from './apiGetway/apiGetway.service';
+import {AuthService} from '../authenticator/auth.service';
 import { GuardarropasComponent } from './guardarropas/guardarropas.component';
 import { PrendasComponent } from './prendas/prendas.component';
 import { EventoComponent } from './evento/evento.component';
@@ -43,7 +43,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     JwtModule.forRoot({
       config: {
         tokenGetter: function  tokenGetter() {
-          return     localStorage.getItem('access_token');},
+          return localStorage.getItem('access_token');
+        },
         whitelistedDomains: ['localhost:3000'],
         blacklistedRoutes: ['http://localhost:3000/auth/login']
       }
