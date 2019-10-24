@@ -21,3 +21,12 @@ steps:
     npm install
     ng build --prod
   displayName: 'npm install and build'
+
+- script: |
+    cp ./Que-Me-Pongo/dist $(Build.ArtifactStagingDirectory)
+  displayName: 'npm install and build'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: drop
