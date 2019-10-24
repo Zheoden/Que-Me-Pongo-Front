@@ -16,14 +16,13 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    cd ./Que-Me-Pongo
     npm install -g @angular/cli
     npm install
     ng build --prod
   displayName: 'npm install and build'
 
 - script: |
-    cp -r ./Que-Me-Pongo/dist $(Build.ArtifactStagingDirectory)
+    cp -r ./dist $(Build.ArtifactStagingDirectory)
   displayName: 'npm install and build'
 
 - task: PublishBuildArtifacts@1
