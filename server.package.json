@@ -1,0 +1,8 @@
+{
+    "name": "que-me-pongo-server",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
