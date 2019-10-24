@@ -1,0 +1,39 @@
+<!-- <table class="table table-hover text-center main-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nombre</th>
+                <th>Co-Ayudante</th>
+                <th>Ultimo Feedback</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let prenda of guardarropa.prendas">
+                <tr (click)="goDetailGroup(group.id)">
+                    <td class="no-mobile"><input type="checkbox" /></td>
+                    <td data-label="Nombre">{{group.name}}</td>
+                    <td data-label="Co-Ayudante" *ngIf="group.professors !== undefined;else no_professors">
+                        {{group.professors[0].firstname}} {{group.professors[0].lastname}}</td>
+                    <ng-template #no_professors>
+                        <td data-label="Co-Ayudante"> - </td>
+                    </ng-template>
+                    <td data-label="Ultimo Feedback" class="no-mobile"
+                        *ngIf="group.last_feedback !== undefined;else no_feedback">
+                        <strong>{{group.lastFeedback.professor.firstname}}
+                            {{group.lastFeedback.professor.lastname}}</strong>: {{group.lastFeedback.description}}
+                    </td>
+                    <ng-template #no_feedback>
+                        <td data-label="Ultimo Feedback" class="no-mobile"> - </td>
+                    </ng-template>
+                    <td class="no-mobile" *ngIf="group.github !== undefined;else no_github">
+                        <button class="btn btn-primary btn-icon" (click)="goGithub($event, group.github)"><i
+                                class="fab fa-github"></i>
+                        </button></td>
+                    <ng-template #no_github>
+                        <td class="no-mobile"> - </td>
+                    </ng-template>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table> -->
