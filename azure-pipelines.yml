@@ -23,6 +23,7 @@ steps:
 
 - script: |
     cp ./index.js ./dist/Que-Me-Pongo/index.js
+    cp ./server.package.json ./dist/Que-Me-Pongo/package.json
   displayName: 'copy index.js to artifact directory'
 
 - task: ArchiveFiles@2
