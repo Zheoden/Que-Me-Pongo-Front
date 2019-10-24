@@ -40,15 +40,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: function  tokenGetter() {
-          return localStorage.getItem('access_token');
-        },
-        whitelistedDomains: ['localhost:3000'],
-        blacklistedRoutes: ['http://localhost:3000/auth/login']
-      }
-    })
   ],
   providers: [ApiGetwayService,
               LoginComponent,
