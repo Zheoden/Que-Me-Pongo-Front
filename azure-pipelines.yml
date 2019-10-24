@@ -23,7 +23,7 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    cp ./Que-Me-Pongo/dist $(Build.ArtifactStagingDirectory)
+    cp -r ./Que-Me-Pongo/dist $(Build.ArtifactStagingDirectory)
   displayName: 'npm install and build'
 
 - task: PublishBuildArtifacts@1
