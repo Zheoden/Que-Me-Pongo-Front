@@ -5,3 +5,4 @@ var options = {
 };
 
 server.use('/', express.static('/home/site/wwwroot', options));
+server.listen(parseInt(process.env.PORT), '0.0.0.0');
