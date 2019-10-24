@@ -2,8 +2,8 @@
     <div class="d-flex flex-column m-auto w-25 foofoo p-5">
         <div class="form-group">
             <span *ngIf="validate" class="text-danger mb-2"> El usuario o la contraseña son incorrectos</span>
-            <input class="form-control mb-3" type="text" placeholder="Ingrese su usuario" [(ngModel)]="username" (ngModelChange)="userChange" />
-            <input class="form-control mb-3 eye-normal" type="{{ typePassword ? 'text' : 'password' }}" placeholder="Ingrese su contraseña" [(ngModel)]="password" (ngModelChange)="passChange" />
+            <input class="form-control mb-3" type="text" placeholder="Ingrese su usuario" [(ngModel)]="username" (ngModelChange)="userChange()" />
+            <input class="form-control mb-3 eye-normal" type="{{ typePassword ? 'text' : 'password' }}" placeholder="Ingrese su contraseña" [(ngModel)]="password" (ngModelChange)="passChange()" />
             <button class="btn btn-primary w-100" (click)="onLogin()" [disabled]="!required"> Ingresar </button>
         </div>
     </div>

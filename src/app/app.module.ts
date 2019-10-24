@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
@@ -15,7 +14,6 @@ import { EventoComponent } from './evento/evento.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { SugerenciasComponent } from './sugerencias/sugerencias.component';
 import { LayoutComponent } from './layout/layout.component';
-import { JwtModule } from '@auth0/angular-jwt';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
