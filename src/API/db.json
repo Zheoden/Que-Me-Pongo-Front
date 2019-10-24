@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "juan",
+      "password": "asd123",
+      "guardarropas": [
+        {
+          "usuarios": [
+            {
+              "id": 2,
+              "username": "perez",
+              "email": "perez@gmail.com"
+            }
+          ]
+        }
+      ],
+      "prendas": [
+        {
+          "id": 1,
+          "tipoPrenda": "jean",
+          "color": "azul",
+          "material": "cuero"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "username": "perez",
+      "password": "asd123"
+    }
+  ]
+}

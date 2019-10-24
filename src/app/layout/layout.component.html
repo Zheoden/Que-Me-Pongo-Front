@@ -1,0 +1,36 @@
+<div>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
+    <p class="navbar-brand nav">Bienvenido Pepe
+    </p>
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+      aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+      <!-- Links -->
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link" routerLink='/home' routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link" routerLink='/evento' routerLinkActive="active">Eventos</a>
+        </li>
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link" routerLink='/calendario' routerLinkActive="active">Calendario</a>
+        </li>
+        <li class="nav-item cursor-pointer">
+          <a class="nav-link" routerLink='/guardarropas' routerLinkActive="active">Guardarropas</a>
+        </li>
+      </ul>
+    </div>
+    <div class="md-form my-0 ml-3">
+      <button type="button" (click)="logout()" class="btn btn-dark">Log Out</button>
+    </div>
+  </nav>
+
+  <div class="content-body">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer *ngIf="false" class="w-100 footer"></footer>
+</div>

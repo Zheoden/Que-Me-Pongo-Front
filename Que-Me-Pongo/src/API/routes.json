@@ -1,5 +1,0 @@
-{
-  "/users/:id/guardarropas": "/users/:id/guardarropas",
-  "/posts/:category": "/posts?category=:category",
-  "/articles\\?id=:id": "/posts/:id"
-}
