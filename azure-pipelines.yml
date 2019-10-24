@@ -21,14 +21,14 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
-# - script: |
-#     cp -r ./dist $(Build.ArtifactStagingDirectory)
-#   displayName: 'npm install and build'
+- script: |
+    cp ./index.js ./dist/Que-Me-Pongo/index.js
+  displayName: 'copy index.js to artifact directory'
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: './dist' 
-    includeRootFolder: true 
+    rootFolderOrFile: './dist/Que-Me-Pongo' 
+    includeRootFolder: false 
     archiveType: 'zip'
     tarCompression: 'gz'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
