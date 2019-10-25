@@ -6,7 +6,7 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {UsuarioComponent} from './usuario/usuario.component';
-import {ApiGetwayService} from './apiGetway/apiGetway.service';
+import { UserService } from './api/userService';
 import {AuthService} from '../authenticator/auth.service';
 import { GuardarropasComponent } from './guardarropas/guardarropas.component';
 import { PrendasComponent } from './prendas/prendas.component';
@@ -39,7 +39,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [ApiGetwayService,
+  providers: [UserService,
               LoginComponent,
               AuthService ],
   bootstrap: [AppComponent]

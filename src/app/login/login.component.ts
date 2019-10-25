@@ -1,6 +1,6 @@
 import { Usuario } from './../modelo/interfaces';
 import { Component} from '@angular/core';
-import { ApiGetwayService } from '../apiGetway/apiGetway.service';
+import { UserService } from '../api/userService';
 import { Router } from '@angular/router';
 
 
@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [ApiGetwayService]
 })
 
 
@@ -20,7 +19,7 @@ export class LoginComponent {
   public validate = false;
   public required = false;
 
-  constructor(private apiGetwayService: ApiGetwayService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   userChange() {
     this.required = Boolean(this.username && this.password);
@@ -31,11 +30,9 @@ export class LoginComponent {
   }
 
   onLogin() {
-    return this.apiGetwayService
+    return this.userService
       .validateLogin(this.username, this.password)
-      .toPromise()
-      .then((user: Usuario) => {
-        this.user = user;
+      .then((user: boolean) => {
         this.router.navigate(['/home'], {
           state: { user }
         });
