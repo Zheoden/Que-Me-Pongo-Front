@@ -13,8 +13,17 @@ export class UserService extends ApiService {
         return Promise.resolve(true);
     }
 
-    public async getDataUsuarios(): Promise<Usuario[]> {
+    public async getDataUsuario(): Promise<Usuario> {
         // return this.post('', { username, password}).then( (response) => response.data);
-        return Promise.resolve([]);
+        return Promise.resolve({
+            id: 'pepe',
+            username: 'pepe',
+            password: 'pepe',
+            guardarropas: [],
+            eventos: [],
+            rangoSensibilidad: 1,
+            email: 'pepe@pepe.com',
+            numeroTelefono: '12341234',
+        });
     }
 }

@@ -14,8 +14,8 @@ export class UsuarioComponent implements OnInit {
   constructor(private api: UserService, private route: ActivatedRoute, private authService: AuthService) {
     const user = this.route.snapshot.queryParamMap.get('username');
     const pass = this.route.snapshot.queryParamMap.get('password');
-    this.api.getDataUsuarios().then((usuario: Usuario[]) => {
-      this.user = usuario[0];
+    this.api.getDataUsuario().then((usuario: Usuario) => {
+      this.user = usuario;
     }).catch(error => {
       console.log(error);
     });

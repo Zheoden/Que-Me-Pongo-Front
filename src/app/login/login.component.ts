@@ -21,15 +21,15 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private router: Router) {}
 
-  userChange() {
+  public userChange() {
     this.required = Boolean(this.username && this.password);
   }
 
-  passChange() {
+  public passChange() {
     this.required = Boolean(this.username && this.password);
   }
 
-  onLogin() {
+  public onLogin() {
     return this.userService
       .validateLogin(this.username, this.password)
       .then((user: boolean) => {
