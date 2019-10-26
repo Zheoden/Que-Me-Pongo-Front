@@ -1,22 +1,108 @@
 <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <table class="table text-center main-table background-cheto text-white mt-5">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container>
-                            <tr>
-                                <td data-label="Id">{{guardarropa.id}}</td>
-                                <td data-label="Nombre">{{guardarropa.nombre}}</td>
-                            </tr>
-                        </ng-container>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <div *ngIf="tienePrendas; else no_prendas" class="row">
+    <div class="col-12">
+      <table class="table text-center main-table background-cheto text-white mt-5">
+        <thead>
+          <tr>
+            <th class="no-mobile">Id</th>
+            <th class="no-mobile">Nombre</th>
+            <th>Tipo Prenda</th>
+            <th>Material</th>
+            <th>Color</th>
+            <th class="no-mobile">En uso</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let prenda of prendas">
+            <tr class="cursor-pointer">
+              <td class="no-mobile" data-label="Id">{{prenda.id}}</td>
+              <td class="no-mobile" data-label="Nombre">{{prenda.nombre}}</td>
+              <td data-label="Tipo Prenda">{{prenda.tipoPrenda}}</td>
+              <td data-label="Material">{{prenda.material}}</td>
+              <td data-label="Color">{{prenda.color}}</td>
+              <td class="no-mobile" data-label="En Uso">{{prenda.enUso ? 'Si' : 'No'}}</td>
+              <td data-label=""><button type="button" class="btn btn-dark m-auto" data-toggle="modal"
+                  data-target="#BorrarPrendaModal" (click)="setIdPrenda(prenda.id)">Borrar</button></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
+  </div>
+  <ng-template #no_prendas>
+    <div class="d-flex flex-column background-cheto text-white p-5 w-75 mt-3 mx-auto">
+      <span class="m-auto text-center">Este guardarropas no tiene prendas!</span>
+      <span class="m-auto a-link cursor-pointer" (click)="agregarPrenda()">Agregale prendas!</span>
+    </div>
+  </ng-template>
+
+  <div *ngIf="tienePrendas" class="d-flex flex-row w-100 footer">
+    <button type="button" class="btn btn-dark m-auto" data-toggle="modal" data-target="#agregarPrendaModal">Agregar
+      prendas</button>
+  </div>
+</div>
+
+<!-- Modal Agregar-->
+<div class="modal fade" id="agregarPrendaModal" tabindex="-1" role="dialog" aria-labelledby="agregarPrendaModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarPrendaModalLabel">Agrega una prenda!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex flex-column">
+        <div class="form-group">
+          <input class="form-control mb-3" type="text" placeholder="Ingrese el nombre de la prenda"
+            [(ngModel)]="currentPrenda.nombre" />
+          <select class="form-control mb-3" [(ngModel)]="currentPrenda.tipoPrenda">
+            <option value="" disabled>Seleccione el tipo de prenda</option>
+            <option *ngFor="let tipo of tipoPrendas" [value]="tipo"> {{ tipo }}</option>
+          </select>
+          <select class="form-control mb-3" [(ngModel)]="currentPrenda.material">
+            <option value="" disabled>Seleccione el Material</option>
+            <option *ngFor="let material of materiales" [value]="material"> {{ material }}</option>
+          </select>
+          <select class="form-control mb-3" [(ngModel)]="currentPrenda.color">
+            <option value="" disabled>Seleccione el color</option>
+            <option *ngFor="let color of colores" [value]="color"> {{ color }}</option>
+          </select>
+          <select class="form-control mb-3" [(ngModel)]="currentPrenda.colorSecundario">
+            <option value="" disabled>Seleccione el color secundario</option>
+            <option *ngFor="let color of colores" [value]="color"> {{ color }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="limpiarPrenda()">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!prendaValida"
+          (click)="agregarPrenda()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Borrar-->
+<div class="modal fade" id="BorrarPrendaModal" tabindex="-1" role="dialog" aria-labelledby="BorrarPrendaModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="BorrarPrendaModalLabel">Borrar la prenda :(</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex flex-column">
+        <span>Se va a eliminar la prenda de su guardarropas. Esta seguro que desea hacerlo?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="borrarPrenda()">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { ApiService } from './apiService';
-import { Usuario, Guardarropa } from '../modelo/interfaces';
+import { Usuario, Guardarropa, Prenda } from '../modelo/interfaces';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -13,7 +13,17 @@ export class GuardarropaService extends ApiService {
             id: '1',
             nombre: 'nombre 2',
             usuarios: [],
-            prendas: [],
+            prendas: [{
+                id: '1',
+                nombre: 'asd',
+                tipoPrenda: 'Buzo',
+                material: 'Algodon',
+                color: 'Rojo',
+                colorSecundario: '',
+                enUso: false,
+                guardarropas: [],
+                atuendos: [],
+            }],
         });
     }
 
@@ -39,5 +49,23 @@ export class GuardarropaService extends ApiService {
             usuarios: [],
             prendas: [],
         }]);
+    }
+
+    public addPrenda(id: string, prenda: Prenda): Promise<Guardarropa> {
+        return Promise.resolve({
+            id: '1',
+            nombre: 'nombre 2',
+            usuarios: [],
+            prendas: [prenda],
+        });
+    }
+
+    public deletePrenda(idGuardarropa: string, idPrenda: string): Promise<Guardarropa> {
+        return Promise.resolve({
+            id: '1',
+            nombre: 'nombre 2',
+            usuarios: [],
+            prendas: [],
+        });
     }
 }

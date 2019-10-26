@@ -12,9 +12,11 @@ export interface Usuario {
 
 export interface Prenda {
   id: string;
+  nombre: string;
   tipoPrenda: string;
   material: string;
   color: string;
+  colorSecundario: string;
   enUso: boolean;
   guardarropas: Guardarropa[];
   atuendos: Prenda[];
