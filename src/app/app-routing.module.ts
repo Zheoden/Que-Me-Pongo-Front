@@ -42,6 +42,10 @@ const routes: Routes = [
         component: EventoComponent,
       },
       {
+        path: 'evento/:id',
+        component: EventoComponent,
+      },
+      {
         path: 'calendario',
         component: CalendarioComponent,
       },
@@ -57,7 +61,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

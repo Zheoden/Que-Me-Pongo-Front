@@ -15,7 +15,7 @@ export class LoginComponent {
   public username = '';
   public password = '';
   public user: Usuario;
-  public typePassword = 'text';
+  public typePassword = 'password';
   public validate = false;
   public required = false;
 
