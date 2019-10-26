@@ -15,13 +15,9 @@ body {
   cursor: pointer;
 }
 
-.no-mobile {
-  display: none;
-}
-
-@media screen and (min-width: 769px) {
+@media screen and (max-width: 769px) {
   .no-mobile {
-    display: block;
+    display: none;
   }
 }
 
