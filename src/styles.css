@@ -7,3 +7,10 @@ body {
   background-size: 100% 100%;
 }
 
+.background-cheto {
+  background-color: #3d3f41;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

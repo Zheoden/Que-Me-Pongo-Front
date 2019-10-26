@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from '../api/eventService';
+import { Evento } from '../modelo/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-evento',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventoComponent implements OnInit {
 
-  constructor() { }
+  public eventos: Evento[];
 
-  ngOnInit() {
+  constructor(private eventService: EventService, private router: Router) { }
+
+  public async ngOnInit() {
+    this.eventService.getEventos().then( (eventos: Evento[]) => this.eventos = eventos);
   }
 
+  public goToDetailEvent(id: string) {
+    this.router.navigate(['/evento/' + id]);
+  }
 }
