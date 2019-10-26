@@ -22,6 +22,10 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'not-found',
+    component: PageNotFoundComponent
+  },
+  {
     path: '',
     component: LayoutComponent,
     children: [
@@ -48,10 +52,6 @@ const routes: Routes = [
       {
         path: 'calendario',
         component: CalendarioComponent,
-      },
-      {
-        path: 'not-found',
-        component: PageNotFoundComponent
       },
       {
         path: '**',
