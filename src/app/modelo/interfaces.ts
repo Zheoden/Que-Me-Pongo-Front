@@ -22,6 +22,7 @@ export interface Prenda {
 
 export interface Guardarropa {
   id: string;
+  nombre: string;
   usuarios: Usuario[];
   prendas: Prenda[];
 }

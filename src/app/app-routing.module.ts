@@ -5,11 +5,11 @@ import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { GuardarropasComponent } from './guardarropas/guardarropas.component';
+import { GuardarropasDetailsComponent } from './guardarropasDetails/guardarropasDetails.component';
 import { PrendasComponent } from './prendas/prendas.component';
 import { EventoComponent } from './evento/evento.component';
 import { CalendarioComponent } from './calendario/calendario.component';
-
-
+import { EventoDetailsComponent } from './eventoDetails/eventoDetails.component';
 
 const routes: Routes = [
   {
@@ -38,8 +38,8 @@ const routes: Routes = [
         component: GuardarropasComponent
       },
       {
-        path: 'guardarropas/:id/prendas',
-        component: PrendasComponent,
+        path: 'guardarropas/:id',
+        component: GuardarropasDetailsComponent,
       },
       {
         path: 'evento',
@@ -47,7 +47,7 @@ const routes: Routes = [
       },
       {
         path: 'evento/:id',
-        component: EventoComponent,
+        component: EventoDetailsComponent,
       },
       {
         path: 'calendario',
