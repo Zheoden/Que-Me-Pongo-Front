@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EventoDetailsComponent implements OnInit {
   public evento: Evento;
+  public currentAtuendoId: string;
   constructor(private eventService: EventService, private route: ActivatedRoute) { }
 
   public async ngOnInit() {
@@ -22,5 +23,9 @@ export class EventoDetailsComponent implements OnInit {
 
   public get atuendosSugeridos() {
     return this.evento.atuendosSugeridos;
+  }
+
+  public setIdAtuendo(id: string) {
+    this.currentAtuendoId = id;
   }
 }
