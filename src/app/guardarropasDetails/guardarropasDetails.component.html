@@ -22,7 +22,7 @@
               <td data-label="Material">{{prenda.material}}</td>
               <td data-label="Color">{{prenda.color}}</td>
               <td class="no-mobile" data-label="En Uso">{{prenda.enUso ? 'Si' : 'No'}}</td>
-              <td data-label=""><button type="button" class="btn btn-dark m-auto" data-toggle="modal"
+              <td data-label=""><button type="button" class="m-auto a-link text-white" data-toggle="modal"
                   data-target="#BorrarPrendaModal" (click)="setIdPrenda(prenda.id)">Borrar</button></td>
             </tr>
           </ng-container>
@@ -33,12 +33,12 @@
   <ng-template #no_prendas>
     <div class="d-flex flex-column background-cheto text-white p-5 w-75 mt-3 mx-auto">
       <span class="m-auto text-center">Este guardarropas no tiene prendas!</span>
-      <span class="m-auto a-link cursor-pointer" (click)="agregarPrenda()">Agregale prendas!</span>
+      <button class="m-auto a-link cursor-pointer" data-toggle="modal" data-target="#agregarPrendaModal">Agregale prendas!</button>
     </div>
   </ng-template>
 
   <div *ngIf="tienePrendas" class="d-flex flex-row w-100 footer">
-    <button type="button" class="btn btn-dark m-auto" data-toggle="modal" data-target="#agregarPrendaModal">Agregar
+    <button type="button" class="btn btn-primary m-auto" data-toggle="modal" data-target="#agregarPrendaModal">Agregar
       prendas</button>
   </div>
 </div>

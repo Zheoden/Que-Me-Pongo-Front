@@ -21,4 +21,7 @@ export class GuardarropasComponent implements OnInit {
     this.router.navigate(['/guardarropas/' + id]);
   }
 
+  public borrarGuardarropas(guardarropaId: string) {
+  }
+
 }

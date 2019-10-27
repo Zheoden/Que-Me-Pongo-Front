@@ -32,7 +32,17 @@ export class GuardarropaService extends ApiService {
             id: '1',
             nombre: 'nombre 1',
             usuarios: [],
-            prendas: [],
+            prendas: [{
+                id: '1',
+                nombre: 'asd',
+                tipoPrenda: 'Buzo',
+                material: 'Algodon',
+                color: 'Rojo',
+                colorSecundario: '',
+                enUso: false,
+                guardarropas: [],
+                atuendos: [],
+            }],
         }, {
             id: '2',
             nombre: 'nombre 2',

@@ -1,22 +1,50 @@
 <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <table class="table text-center main-table background-cheto text-white mt-5 cursor-pointer">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let guardarropa of guardarropas">
-                            <tr (click)="goToDetail(guardarropa.id)">
-                                <td data-label="Id">{{guardarropa.id}}</td>
-                                <td data-label="Nombre">{{guardarropa.nombre}}</td>
-                            </tr>
-                        </ng-container>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table text-center main-table background-cheto text-white mt-5 cursor-pointer">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Cantidad de Prendas</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let guardarropa of guardarropas">
+            <tr>
+              <td (click)="goToDetail(guardarropa.id)" data-label="Id">{{guardarropa.id}}</td>
+              <td (click)="goToDetail(guardarropa.id)" data-label="Nombre">{{guardarropa.nombre}}</td>
+              <td (click)="goToDetail(guardarropa.id)" data-label="Cantidad de Prendas">{{guardarropa.prendas.length}}</td>
+              <td data-label=""><button type="button" class="m-auto a-link text-white" data-toggle="modal"
+                data-target="#BorrarModal" (click)="borrarGuardarropas(guardarropa.id)">Borrar</button></td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>
+
+
+<!-- Modal Borrar-->
+<div class="modal fade" id="BorrarModal" tabindex="-1" role="dialog" aria-labelledby="BorrarModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="BorrarModalLabel">Borrar el guardarropa :(</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex flex-column">
+        <span>Se va a eliminar el guardarropas. Esta seguro que desea hacerlo?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,7 +33,7 @@ export class LoginComponent {
     return this.userService
       .validateLogin(this.username, this.password)
       .then((user: boolean) => {
-        this.router.navigate(['/home'], {
+        this.router.navigate(['/eventos'], {
           state: { user }
         });
       })

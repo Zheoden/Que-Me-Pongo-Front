@@ -30,10 +30,6 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'home',
-        component: UsuarioComponent
-      },
-      {
         path: 'guardarropas',
         component: GuardarropasComponent
       },
@@ -42,11 +38,11 @@ const routes: Routes = [
         component: GuardarropasDetailsComponent,
       },
       {
-        path: 'evento',
+        path: 'eventos',
         component: EventoComponent,
       },
       {
-        path: 'evento/:id',
+        path: 'eventos/:id',
         component: EventoDetailsComponent,
       },
       {

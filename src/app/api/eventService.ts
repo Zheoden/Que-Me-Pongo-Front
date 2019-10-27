@@ -15,7 +15,7 @@ export class EventService extends ApiService {
             ciudad: 'string',
             fecha: new Date(),
             atuendosAceptados: [],
-            atuendosMovimientos: [],
+            atuendosSugeridos: [],
             usuario: {
                 id: 'user',
                 username: 'user',
@@ -36,7 +36,7 @@ export class EventService extends ApiService {
             ciudad: 'ciudad',
             fecha: new Date(),
             atuendosAceptados: [],
-            atuendosMovimientos: [],
+            atuendosSugeridos: [],
             usuario: {
                 id: 'user',
                 username: 'user',
@@ -53,7 +53,7 @@ export class EventService extends ApiService {
             ciudad: 'ciudad 1',
             fecha: new Date(),
             atuendosAceptados: [],
-            atuendosMovimientos: [],
+            atuendosSugeridos: [],
             usuario: {
                 id: 'user',
                 username: 'user',
@@ -70,7 +70,7 @@ export class EventService extends ApiService {
             ciudad: 'ciudad 2',
             fecha: new Date(),
             atuendosAceptados: [],
-            atuendosMovimientos: [],
+            atuendosSugeridos: [],
             usuario: {
                 id: 'user',
                 username: 'user',

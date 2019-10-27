@@ -24,3 +24,17 @@ body {
 .table thead th {
   border-bottom: none;
 }
+
+.a-link {
+  color: #6c757d;
+  text-decoration: underline;
+  border: none;
+  background-color: inherit;
+}
+
+.footer {
+  height: 50px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
