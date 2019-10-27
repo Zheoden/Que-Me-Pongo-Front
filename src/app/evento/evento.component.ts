@@ -15,7 +15,7 @@ export class EventoComponent implements OnInit {
     id: '',
     nombre: '',
     ciudad: '',
-    fecha: new Date(),
+    fecha: null,
     atuendosSugeridos: [],
     atuendosAceptados: [],
     usuario: {} as any
@@ -45,14 +45,16 @@ export class EventoComponent implements OnInit {
     this.eventoId = id;
   }
 
-  public agregarEvento() {}
+  public agregarEvento() {
+    this.eventService.addEvento(this.currentEvent).then( (eventos: Evento[]) => this.eventos = eventos );
+  }
 
   public limpiarEvento() {
     this.currentEvent = {
       id: '',
       nombre: '',
       ciudad: '',
-      fecha: new Date(),
+      fecha: null,
       atuendosSugeridos: [],
       atuendosAceptados: [],
       usuario: {} as any
