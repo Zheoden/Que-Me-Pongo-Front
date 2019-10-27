@@ -1,1 +1,17 @@
-<p>calendario works!</p>
+<div class='app' style='background-color: white;'>
+
+    <div class='app-top mt-3'>
+        <button (click)='toggleVisible()'>toggle visible</button>
+        <button (click)='toggleWeekends()'>toggle weekends</button>
+        <button (click)='gotoPast()'>go to a date in the past</button>
+    </div>
+
+    <div class='app-calendar' *ngIf="calendarVisible">
+        <full-calendar #calendar defaultView="dayGridMonth" [header]="{
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents" (dateClick)="handleDateClick($event)"></full-calendar>
+    </div>
+
+</div>

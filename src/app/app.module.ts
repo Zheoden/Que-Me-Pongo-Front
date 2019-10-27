@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 /* Servicios */
 import { UserService } from './api/userService';
@@ -48,6 +49,7 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FullCalendarModule
   ],
   providers: [UserService,
     CalendarService,
