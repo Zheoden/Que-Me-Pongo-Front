@@ -15,4 +15,12 @@ export class EventoDetailsComponent implements OnInit {
   public async ngOnInit() {
     this.eventService.getEventosById(this.route.snapshot.paramMap.get('id')).then( (evento: Evento) => this.evento = evento);
   }
+
+  public get atuendosAceptados() {
+    return this.evento.atuendosAceptados;
+  }
+
+  public get atuendosSugeridos() {
+    return this.evento.atuendosSugeridos;
+  }
 }

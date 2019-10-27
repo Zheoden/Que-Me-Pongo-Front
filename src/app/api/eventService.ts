@@ -64,7 +64,7 @@ export class EventService extends ApiService {
               atuendos: []
             }
           ],
-          aceptado: false,
+          aceptado: true,
           evento: {} as any
         },
         {
