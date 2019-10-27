@@ -46,4 +46,16 @@ export class EventoComponent implements OnInit {
   }
 
   public agregarEvento() {}
+
+  public limpiarEvento() {
+    this.currentEvent = {
+      id: '',
+      nombre: '',
+      ciudad: '',
+      fecha: new Date(),
+      atuendosSugeridos: [],
+      atuendosAceptados: [],
+      usuario: {} as any
+    };
+  }
 }
