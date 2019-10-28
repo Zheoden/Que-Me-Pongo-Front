@@ -1,17 +1,33 @@
 <div class='app'>
-
-    <div class='app-top mt-3'>
-        <button (click)='toggleVisible()'>toggle visible</button>
-        <button (click)='toggleWeekends()'>toggle weekends</button>
-        <button (click)='gotoPast()'>go to a date in the past</button>
-    </div>
-
-    <div class='app-calendar text-white' *ngIf="calendarVisible">
+    <div class='app-calendar text-white mt-2' *ngIf="calendarVisible && calendarEvents">
         <full-calendar #calendar defaultView="dayGridMonth" [header]="{
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents" (dateClick)="handleDateClick($event)"></full-calendar>
+      }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"></full-calendar>
     </div>
-
 </div>
+<!-- Modal Agregar
+<div class="modal fade" id="agregarEventoModal" tabindex="-1" role="dialog" aria-labelledby="agregarEventoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarEventoModalLabel">Agrega un nuevo Evento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body d-flex flex-column">
+                <div class="form-group">
+                    <input class="form-control mb-3" type="text" placeholder="Ingrese el nombre del evento" [(ngModel)]="nombre" />
+                </div>
+                <div class="form-group">
+                    <input type="date" name="eventDay" class="form-control" [(ngModel)]="fecha" placeholder="Ingese la fecha del evento">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="eliminarEvento()">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!fechaValida">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div> -->

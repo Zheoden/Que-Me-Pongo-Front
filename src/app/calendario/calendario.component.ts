@@ -1,47 +1,49 @@
-import { Component, ViewChild} from '@angular/core';
+import { EventService } from './../api/eventService';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
+import { Evento } from '../modelo/interfaces';
 
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.scss']
 })
-export class CalendarioComponent {
+export class CalendarioComponent implements OnInit {
 
-  @ViewChild('calendar',{static: false}) calendarComponent: FullCalendarComponent; // the #calendar in the template
 
+  @ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent; // the #calendar in the template
+
+  eventos: {};
+  nombre: string;
+  fecha: Date;
+  fechaHoy = new Date();
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   calendarWeekends = true;
-  calendarEvents: EventInput[] = [
-    { title: 'Event Now', start: new Date() }
-  ];
+  calendarEvents: EventInput[]= [{title: 'algo',start: new Date()}];
 
-  toggleVisible() {
-    this.calendarVisible = !this.calendarVisible;
+ constructor(private eventoAxios: EventService) {
+
+ }
+
+
+  armarBodyEvento(evento: Evento) {
+    return {title: evento.nombre, start: evento.fecha};
   }
 
-  toggleWeekends() {
-    this.calendarWeekends = !this.calendarWeekends;
+  obetenerEventos(eventos: Evento[]) {
+  this.eventos = eventos.map(evento => this.armarBodyEvento(evento));
+  this.calendarEvents.push(this.eventos);
   }
 
-  gotoPast() {
-    const  calendarApi = this.calendarComponent.getApi();
-    calendarApi.gotoDate('2000-01-01'); // call a method on the Calendar object
-  }
-
-  handleDateClick(arg) {
-    if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
-      this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
-        title: 'New Event',
-        start: arg.date,
-        allDay: arg.allDay
-      })
-    }
+  ngOnInit(): void {
+     this.eventoAxios.getEventos().then(eventos => {
+       this.obetenerEventos(eventos);
+     });
   }
 
 }
