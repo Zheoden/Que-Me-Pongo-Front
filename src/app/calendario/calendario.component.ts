@@ -24,7 +24,7 @@ export class CalendarioComponent implements OnInit {
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   calendarWeekends = true;
-  calendarEvents: EventInput[]= [{title: 'algo',start: new Date()}];
+  calendarEvents: EventInput[] = [];
 
  constructor(private eventoAxios: EventService) {
 
