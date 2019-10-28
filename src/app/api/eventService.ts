@@ -246,11 +246,11 @@ export class EventService extends ApiService {
     return Promise.resolve([evento]);
   }
 
-  public async calificarAtuendo(idAtuendo: string): Promise<Atuendo> {
+  public async calificarAtuendo(idAtuendo: string, puntuacion: number): Promise<Atuendo> {
     return Promise.resolve({} as any);
   }
 
-  public async AceptarAtuendo(idAtuendo: string): Promise<Atuendo> {
+  public async aceptarAtuendo(idAtuendo: string): Promise<Atuendo> {
     return Promise.resolve({} as any);
   }
 

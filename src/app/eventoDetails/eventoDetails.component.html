@@ -22,15 +22,63 @@
               <td data-label="Calzado">{{atuendo.id}}</td>
               <td class="no-mobile" data-label="Aceptado">{{atuendo.aceptado ? 'Si' : 'No'}}</td>
               <td data-label=""><button type="button"
-                  class="m-auto a-link text-white" data-toggle="modal" data-target="#BorrarPrendaModal"
+                  class="m-auto a-link text-white" [ngClass]="{ 'text-black-50': atuendo.aceptado}" data-toggle="modal" data-target="#AceptarAtuendoModal"
                   (click)="setIdAtuendo(atuendo.id)" [disabled]="atuendo.aceptado">Aceptar</button></td>
               <td class="no-mobile" data-label=""><button type="button" class="m-auto a-link text-white"
-                  data-toggle="modal" data-target="#BorrarPrendaModal"
+                  data-toggle="modal" data-target="#calificarAtuendoModal"
                   (click)="setIdAtuendo(atuendo.id)">Calificar</button></td>
             </tr>
           </ng-container>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Calificar-->
+<div class="modal fade" id="calificarAtuendoModal" tabindex="-1" role="dialog" aria-labelledby="calificarAtuendoModallLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="calificarAtuendoModalLabel">Agrega un evento!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex flex-column">
+        <div class="form-group my-auto">
+                <input class="form-control" type="number" placeholder="Ingrese la calificacion del atuendo" [(ngModel)]="currentCalificacion" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="limpiarEvento()">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!Boolean(currentCalificacion)"
+          (click)="calificarAtuendo()">Calificar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Aceptar-->
+<div class="modal fade" id="AceptarAtuendoModal" tabindex="-1" role="dialog" aria-labelledby="AceptarAtuendoModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AceptarAtuendoModalLabel">Aceptar atuendo :)</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex flex-column">
+        <span>Se va a aceptar el atuendo. Esta seguro que desea hacerlo?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="aceptarAtuendo()">Aceptar</button>
+      </div>
     </div>
   </div>
 </div>
