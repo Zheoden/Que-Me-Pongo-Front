@@ -1,14 +1,21 @@
-@import '~@fullcalendar/core/main.css';
-@import '~@fullcalendar/daygrid/main.css';
-[override] body {
-    background-color: white;
-}
-
-.app-top {
-    margin: 0 0 3em;
-}
-
-.app-calendar {
-    margin: 0 auto;
-    max-width: 900px;
-}
+        @import '~@fullcalendar/core/main.css';
+        @import '~@fullcalendar/daygrid/main.css';
+        .app-top {
+            margin: 0 0 3em;
+        }
+        
+        .app-calendar {
+            margin: 0 auto;
+            margin-top: 30px;
+            max-width: 850px;
+            max-height: 850px;
+        }
+        
+        .fc-header {
+            position: fixed;
+        }
+        
+        .fc-content {
+            padding-top: 50px;
+            margin-left: 40px;
+        }

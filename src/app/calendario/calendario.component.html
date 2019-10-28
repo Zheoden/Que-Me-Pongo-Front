@@ -1,10 +1,10 @@
-<div class='app'>
-    <div class='app-calendar text-white mt-2' *ngIf="calendarVisible && calendarEvents">
+<div class='app mt-5'>
+    <div class='app-calendar mt-3 p-lg-3' style='background-color: white;' *ngIf="calendarVisible &&  eventos">
         <full-calendar #calendar defaultView="dayGridMonth" [header]="{
-        left: 'prev,next today',
+        left: ' prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents"></full-calendar>
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,istWeek'
+      }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="eventos"></full-calendar>
     </div>
 </div>
 <!-- Modal Agregar

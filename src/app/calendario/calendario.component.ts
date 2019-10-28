@@ -15,16 +15,12 @@ import { Evento } from '../modelo/interfaces';
 export class CalendarioComponent implements OnInit {
 
 
-  @ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent; // the #calendar in the template
+  @ViewChild('calendar', {static: true}) calendarComponent: FullCalendarComponent; // the #calendar in the template
 
   eventos: {};
-  nombre: string;
-  fecha: Date;
-  fechaHoy = new Date();
   calendarVisible = true;
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   calendarWeekends = true;
-  calendarEvents: EventInput[] = [];
 
  constructor(private eventoAxios: EventService) {
 
@@ -32,15 +28,14 @@ export class CalendarioComponent implements OnInit {
 
 
   armarBodyEvento(evento: Evento) {
-    return {title: evento.nombre, start: evento.fecha};
+    return {title: evento.nombre, start: evento.fecha, textColor: 'white'};
   }
 
   obetenerEventos(eventos: Evento[]) {
   this.eventos = eventos.map(evento => this.armarBodyEvento(evento));
-  this.calendarEvents.push(this.eventos);
   }
 
-  ngOnInit(): void {
+   ngOnInit() {
      this.eventoAxios.getEventos().then(eventos => {
        this.obetenerEventos(eventos);
      });
