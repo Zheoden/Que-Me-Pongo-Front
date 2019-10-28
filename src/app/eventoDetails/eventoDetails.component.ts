@@ -37,4 +37,9 @@ export class EventoDetailsComponent implements OnInit {
   public calificarAtuendo() {
     this.eventService.calificarAtuendo(this.currentAtuendoId, this.currentCalificacion);
   }
+
+  public limpiarCalificacion() {
+    this.calificarAtuendo = undefined;
+  }
 }
+
