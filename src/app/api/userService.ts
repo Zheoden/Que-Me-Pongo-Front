@@ -8,22 +8,7 @@ export class UserService extends ApiService {
         super();
     }
 
-    public async validateLogin(username: string, password: string): Promise<boolean> {
-        // return this.post('', { username, password}).then( (response) => response.data);
-        return Promise.resolve(true);
-    }
-
-    public async getDataUsuario(): Promise<Usuario> {
-        // return this.post('', { username, password}).then( (response) => response.data);
-        return Promise.resolve({
-            id: 'pepe',
-            username: 'pepe',
-            password: 'pepe',
-            guardarropas: [],
-            eventos: [],
-            rangoSensibilidad: 1,
-            email: 'pepe@pepe.com',
-            numeroTelefono: '12341234',
-        });
+    public async validateLogin(username: string, password: string): Promise<Usuario> {
+        return this.post('/login', { username, password}).then( (response) => response.data);
     }
 }
