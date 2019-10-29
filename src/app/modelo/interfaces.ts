@@ -13,10 +13,10 @@ export interface Usuario {
 export interface Prenda {
   id: string;
   nombre: string;
-  tipoPrenda: string;
+  tipo: string;
   material: string;
-  color: string;
-  colorSecundario: string;
+  color_primario: string;
+  color_secundario?: string;
   enUso: boolean;
   guardarropas: Guardarropa[];
   atuendos: Prenda[];
@@ -34,7 +34,7 @@ export interface Evento {
   nombre: string;
   ciudad: string;
   fecha: Date;
-  atuendosSugeridos: Atuendo[]
+  atuendosSugeridos: Atuendo[];
   atuendosAceptados: Atuendo[];
   usuario: Usuario;
 }

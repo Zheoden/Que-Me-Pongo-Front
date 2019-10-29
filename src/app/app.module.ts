@@ -7,9 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
+import { UsuarioGlobal } from './usuario/user';
+
 /* Servicios */
 import { UserService } from './api/userService';
-import { CalendarService } from './api/calendarService';
 import { EventService } from './api/eventService';
 import { GuardarropaService } from './api/guardarropaService';
 import { AuthService } from '../authenticator/auth.service';
@@ -51,8 +52,8 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     FullCalendarModule
   ],
-  providers: [UserService,
-    CalendarService,
+  providers: [UsuarioGlobal,
+    UserService,
     EventService,
     GuardarropaService,
     LoginComponent,

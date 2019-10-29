@@ -17,9 +17,9 @@
           <ng-container *ngFor="let atuendo of atuendosSugeridos">
             <tr>
               <td class="no-mobile" data-label="Id">{{atuendo.id}}</td>
-              <td data-label="Parte superior">{{atuendo.id}}</td>
-              <td data-label="Parte inferior">{{atuendo.id}}</td>
-              <td data-label="Calzado">{{atuendo.id}}</td>
+              <td data-label="Parte superior">{{parsePrenda(atuendo, partesSuperiores)}}</td>
+              <td data-label="Parte inferior">{{parsePrenda(atuendo, partesInferiores)}}</td>
+              <td data-label="Calzado">{{parsePrenda(atuendo, calzado)}}</td>
               <td class="no-mobile" data-label="Aceptado">{{atuendo.aceptado ? 'Si' : 'No'}}</td>
               <td data-label=""><button type="button"
                   class="m-auto a-link text-white" [ngClass]="{ 'text-black-50': atuendo.aceptado}" data-toggle="modal" data-target="#AceptarAtuendoModal"

@@ -18,9 +18,9 @@
             <tr class="cursor-pointer">
               <td class="no-mobile" data-label="Id">{{prenda.id}}</td>
               <td class="no-mobile" data-label="Nombre">{{prenda.nombre}}</td>
-              <td data-label="Tipo Prenda">{{prenda.tipoPrenda}}</td>
+              <td data-label="Tipo Prenda">{{prenda.tipo}}</td>
               <td data-label="Material">{{prenda.material}}</td>
-              <td data-label="Color">{{prenda.color}}</td>
+              <td data-label="Color">{{prenda.color_primario}}</td>
               <td class="no-mobile" data-label="En Uso">{{prenda.enUso ? 'Si' : 'No'}}</td>
               <td data-label=""><button type="button" class="m-auto a-link text-white" data-toggle="modal"
                   data-target="#BorrarPrendaModal" (click)="setIdPrenda(prenda.id)">Borrar</button></td>
@@ -58,7 +58,7 @@
         <div class="form-group">
           <input class="form-control mb-3" type="text" placeholder="Ingrese el nombre de la prenda"
             [(ngModel)]="currentPrenda.nombre" />
-          <select class="form-control mb-3" [(ngModel)]="currentPrenda.tipoPrenda">
+          <select class="form-control mb-3" [(ngModel)]="currentPrenda.tipo">
             <option value="" disabled>Seleccione el tipo de prenda</option>
             <option *ngFor="let tipo of tipoPrendas" [value]="tipo"> {{ tipo }}</option>
           </select>
@@ -66,11 +66,11 @@
             <option value="" disabled>Seleccione el Material</option>
             <option *ngFor="let material of materiales" [value]="material"> {{ material }}</option>
           </select>
-          <select class="form-control mb-3" [(ngModel)]="currentPrenda.color">
+          <select class="form-control mb-3" [(ngModel)]="currentPrenda.color_primario">
             <option value="" disabled>Seleccione el color</option>
             <option *ngFor="let color of colores" [value]="color"> {{ color }}</option>
           </select>
-          <select class="form-control mb-3" [(ngModel)]="currentPrenda.colorSecundario">
+          <select class="form-control mb-3" [(ngModel)]="currentPrenda.color_secundario">
             <option value="" disabled>Seleccione el color secundario</option>
             <option *ngFor="let color of colores" [value]="color"> {{ color }}</option>
           </select>
