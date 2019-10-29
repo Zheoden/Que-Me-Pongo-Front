@@ -44,5 +44,12 @@ export interface Atuendo {
   prendas: Prenda[];
   aceptado: boolean;
   evento: Evento;
+  calificacion: number;
+}
+
+export interface EventoPayload {
+  nombre: string;
+  ciudad: string;
+  fecha: string;
 }
 

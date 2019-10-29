@@ -26,7 +26,7 @@ export class EventoDetailsComponent implements OnInit {
   }
 
   public get atuendosSugeridos() {
-    return this.evento.atuendosSugeridos;
+    return this.evento && this.evento.atuendosSugeridos || [];
   }
 
   public setIdAtuendo(id: string) {
@@ -40,17 +40,26 @@ export class EventoDetailsComponent implements OnInit {
       const indexAux = this.usuario.user.eventos[index].atuendosSugeridos.indexOf(aux);
       if (indexAux !== -1) {
         this.eventService.aceptarAtuendo(this.currentAtuendoId)
-        .then( (atuendo) => this.usuario.user.eventos[index].atuendosSugeridos[1] = atuendo );
+        .then( (atuendo) => this.usuario.user.eventos[index].atuendosSugeridos[indexAux] = atuendo );
       }
     }
   }
 
   public calificarAtuendo() {
-    this.eventService.calificarAtuendo(this.currentAtuendoId, this.currentCalificacion);
+    console.log(this.currentCalificacion);
+    const index = this.usuario.user.eventos.indexOf(this.evento);
+    if (index !== -1) {
+      const aux = this.usuario.user.eventos[index].atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
+      const indexAux = this.usuario.user.eventos[index].atuendosSugeridos.indexOf(aux);
+      if (indexAux !== -1) {
+        this.eventService.calificarAtuendo(this.usuario.user.id, this.currentAtuendoId, this.currentCalificacion).
+          then( (atuendo) => this.usuario.user.eventos[index].atuendosSugeridos[indexAux] = atuendo );
+      }
+    }
   }
 
   public limpiarCalificacion() {
-    this.calificarAtuendo = undefined;
+    this.currentCalificacion = undefined;
   }
 
   public get partesSuperiores() {

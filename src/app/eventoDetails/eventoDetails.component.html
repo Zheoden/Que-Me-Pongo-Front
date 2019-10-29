@@ -24,9 +24,12 @@
               <td data-label=""><button type="button"
                   class="m-auto a-link text-white" [ngClass]="{ 'text-black-50': atuendo.aceptado}" data-toggle="modal" data-target="#AceptarAtuendoModal"
                   (click)="setIdAtuendo(atuendo.id)" [disabled]="atuendo.aceptado">Aceptar</button></td>
-              <td class="no-mobile" data-label=""><button type="button" class="m-auto a-link text-white"
-                  data-toggle="modal" data-target="#calificarAtuendoModal"
-                  (click)="setIdAtuendo(atuendo.id)">Calificar</button></td>
+              <td class="no-mobile" data-label="">
+                <button *ngIf="!atuendo.calificacion; else no_calificacion" type="button" class="m-auto a-link text-white" data-toggle="modal" data-target="#calificarAtuendoModal" (click)="setIdAtuendo(atuendo.id)">Calificar</button>
+                <ng-template #no_calificacion>
+                  <span>{{atuendo.calificacion}}</span>
+                </ng-template>
+              </td>
             </tr>
           </ng-container>
         </tbody>
@@ -41,14 +44,14 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="calificarAtuendoModalLabel">Agrega un evento!</h5>
+        <h5 class="modal-title" id="calificarAtuendoModalLabel">Califica un atuendo!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body d-flex flex-column">
         <div class="form-group my-auto">
-                <input class="form-control" type="number" placeholder="Ingrese la calificacion del atuendo" [(ngModel)]="currentCalificacion" />
+          <input class="form-control" type="number" min="1" max="10" placeholder="Ingrese la calificacion del atuendo" [(ngModel)]="currentCalificacion"/>
         </div>
       </div>
       <div class="modal-footer">

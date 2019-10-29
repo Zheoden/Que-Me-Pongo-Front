@@ -1,5 +1,5 @@
 import { ApiService } from './apiService';
-import { Evento, Atuendo, Usuario } from '../modelo/interfaces';
+import { Evento, Atuendo, Usuario, EventoPayload } from '../modelo/interfaces';
 import { Injectable } from '@angular/core';
 import { UsuarioGlobal } from '../usuario/user';
 
@@ -17,12 +17,12 @@ export class EventService extends ApiService {
     return Promise.resolve(this.usuario.user.eventos);
   }
 
-  public async addEvento(evento: Evento): Promise<Evento[]> {
-    return Promise.resolve([evento]);
+  public async addEvento(userId: string, evento: EventoPayload): Promise<Evento[]> {
+    return this.post(`/users/${userId}/eventos/crearEvento`, evento).then( (response) => response.data);
   }
 
-  public async calificarAtuendo(idAtuendo: string, puntuacion: number): Promise<Atuendo> {
-    return Promise.resolve({} as any);
+  public async calificarAtuendo(userid: string, idAtuendo: string, puntuacion: number): Promise<Atuendo> {
+    return this.put(`/users/${userid}/atuendo/${idAtuendo}/calificarAtuendo/${puntuacion}`).then( (response) => response.data);
   }
 
   public async aceptarAtuendo(idAtuendo: string): Promise<Atuendo> {
