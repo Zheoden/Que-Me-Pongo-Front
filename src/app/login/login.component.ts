@@ -19,11 +19,19 @@ export class LoginComponent {
   public typePassword = 'password';
   public validate = false;
   public required = false;
+  public validateEmail: boolean;
 
   constructor(private userService: UserService, private router: Router, private usuario: UsuarioGlobal) {}
 
   public userChange() {
-    this.required = Boolean(this.username && this.password);
+    if (this.username.includes('@')) {
+    const regexp = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$');
+    this.validateEmail = !regexp.test(this.username);
+    this.required = Boolean(this.validateEmail);
+    } else {
+    this.validateEmail = false;
+    }
+    this.required = Boolean(this.username && this.password  );
   }
 
   public passChange() {

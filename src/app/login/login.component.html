@@ -3,6 +3,7 @@
         <div class="col-md-6 col-sm-12 form-group background-cheto p-5 m-auto">
             <span *ngIf="validate" class="text-danger mb-2"> El usuario o la contraseña son incorrectos</span>
             <input class="form-control mb-3" type="text" placeholder="Ingrese su usuario" [(ngModel)]="username" (ngModelChange)="userChange()" />
+            <span><p *ngIf="validateEmail" style="color: red;">Email invalido</p></span>
             <input class="form-control mb-3 eye-normal" [type]="typePassword" placeholder="Ingrese su contraseña" [(ngModel)]="password" (ngModelChange)="passChange()" />
             <button class="btn btn-primary w-100" (click)="onLogin()" [disabled]="!required"> Ingresar </button>
         </div>

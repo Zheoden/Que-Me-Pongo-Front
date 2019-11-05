@@ -12,6 +12,7 @@ import { UsuarioGlobal } from '../usuario/user';
 export class EventoComponent implements OnInit {
   public eventos: Evento[];
   public eventoId: string;
+  public validDate:  boolean;
   public currentEvent: Evento = {
     id: '',
     nombre: '',
@@ -32,8 +33,14 @@ export class EventoComponent implements OnInit {
     return Boolean(
       this.currentEvent.nombre &&
         this.currentEvent.ciudad &&
-        this.currentEvent.fecha
+        this.currentEvent.fecha &&
+        !this.validDate
     );
+  }
+
+  public onEventChangeDate()
+  {
+   this.validDate = (this.currentEvent.fecha <= new Date());
   }
 
   public async ngOnInit() {
@@ -42,6 +49,7 @@ export class EventoComponent implements OnInit {
       .then((eventos: Evento[]) => (this.eventos = eventos));
   }
 
+  
   public goToDetailEvent(id: string) {
     this.router.navigate(['/eventos/' + id]);
   }
