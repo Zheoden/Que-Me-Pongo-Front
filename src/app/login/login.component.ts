@@ -1,5 +1,5 @@
 import { Usuario } from './../modelo/interfaces';
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { UserService } from '../api/userService';
 import { Router } from '@angular/router';
 import { UsuarioGlobal } from '../usuario/user';
@@ -12,7 +12,7 @@ import { UsuarioGlobal } from '../usuario/user';
 })
 
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public username = '';
   public password = '';
   public user: Usuario;
@@ -22,6 +22,12 @@ export class LoginComponent {
   public validateEmail: boolean;
 
   constructor(private userService: UserService, private router: Router, private usuario: UsuarioGlobal) {}
+
+  public async ngOnInit() {
+    if (this.usuario.getUserLoggedIn()) {
+      this.router.navigate(['/eventos']);
+    }
+  }
 
   public userChange() {
     if (this.username.includes('@')) {
@@ -42,7 +48,7 @@ export class LoginComponent {
     return this.userService
       .validateLogin(this.username, this.password)
       .then((user: Usuario) => {
-        this.usuario.user = user;
+        this.usuario.setUserLoggedIn(user);
         this.router.navigate(['/eventos']);
       })
       .catch(error => {

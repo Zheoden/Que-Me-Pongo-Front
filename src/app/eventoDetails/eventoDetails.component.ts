@@ -17,7 +17,7 @@ export class EventoDetailsComponent implements OnInit {
 
   public async ngOnInit() {
     await this.eventService.getEventosById(this.route.snapshot.paramMap.get('id')).then( (evento: Evento) => this.evento = evento);
-    this.eventService.atuendosRecomendados(this.usuario.user.id, this.evento.id)
+    this.eventService.atuendosRecomendados(this.usuario.getUserLoggedIn().id, this.evento.id)
       .then( (atuendos: Atuendo[]) => this.evento.atuendosSugeridos = atuendos);
   }
 
@@ -34,26 +34,26 @@ export class EventoDetailsComponent implements OnInit {
   }
 
   public aceptarAtuendo() {
-    const index = this.usuario.user.eventos.indexOf(this.evento);
+    const index = this.usuario.getUserLoggedIn().eventos.indexOf(this.evento);
     if (index !== -1) {
-      const aux = this.usuario.user.eventos[index].atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
-      const indexAux = this.usuario.user.eventos[index].atuendosSugeridos.indexOf(aux);
+      const aux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
+      const indexAux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.indexOf(aux);
       if (indexAux !== -1) {
         this.eventService.aceptarAtuendo(this.currentAtuendoId)
-        .then( (atuendo) => this.usuario.user.eventos[index].atuendosSugeridos[indexAux] = atuendo );
+        .then( (atuendo) => this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos[indexAux] = atuendo );
       }
     }
   }
 
   public calificarAtuendo() {
     console.log(this.currentCalificacion);
-    const index = this.usuario.user.eventos.indexOf(this.evento);
+    const index = this.usuario.getUserLoggedIn().eventos.indexOf(this.evento);
     if (index !== -1) {
-      const aux = this.usuario.user.eventos[index].atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
-      const indexAux = this.usuario.user.eventos[index].atuendosSugeridos.indexOf(aux);
+      const aux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
+      const indexAux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.indexOf(aux);
       if (indexAux !== -1) {
-        this.eventService.calificarAtuendo(this.usuario.user.id, this.currentAtuendoId, this.currentCalificacion).
-          then( (atuendo) => this.usuario.user.eventos[index].atuendosSugeridos[indexAux] = atuendo );
+        this.eventService.calificarAtuendo(this.usuario.getUserLoggedIn().id, this.currentAtuendoId, this.currentCalificacion).
+          then( (atuendo) => this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos[indexAux] = atuendo );
       }
     }
   }

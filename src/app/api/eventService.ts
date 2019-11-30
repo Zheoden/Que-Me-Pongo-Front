@@ -10,11 +10,11 @@ export class EventService extends ApiService {
   }
 
   public async getEventosById(id: string): Promise<Evento> {
-    return Promise.resolve(this.usuario.user.eventos.find( (elem) => elem.id.toString() === id));
+    return Promise.resolve(this.usuario.getUserLoggedIn().eventos.find( (elem) => elem.id.toString() === id));
   }
 
   public async getEventos(): Promise<Evento[]> {
-    return Promise.resolve(this.usuario.user.eventos);
+    return Promise.resolve(this.usuario.getUserLoggedIn().eventos);
   }
 
   public async addEvento(userId: string, evento: EventoPayload): Promise<Evento[]> {

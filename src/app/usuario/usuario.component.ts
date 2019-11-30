@@ -13,6 +13,6 @@ export class UsuarioComponent implements OnInit {
   constructor(private usuario: UsuarioGlobal) {}
 
   ngOnInit() {
-    this.user = this.usuario.user;
+    this.user = this.usuario.getUserLoggedIn();
   }
 }

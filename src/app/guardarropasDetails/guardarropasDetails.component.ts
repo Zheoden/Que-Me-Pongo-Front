@@ -128,12 +128,12 @@ export class GuardarropasDetailsComponent implements OnInit {
 
   public agregarPrenda() {
     this.guardarropaService
-      .addPrenda(this.usuario.user.id, this.guardarropa.id, this.currentPrenda)
+      .addPrenda(this.usuario.getUserLoggedIn().id, this.guardarropa.id, this.currentPrenda)
       .then((guardarropa) => {
-        const index = this.usuario.user.guardarropas.indexOf(this.guardarropa);
+        const index = this.usuario.getUserLoggedIn().guardarropas.indexOf(this.guardarropa);
         this.guardarropa = guardarropa;
         if (index !== -1) {
-          this.usuario.user.guardarropas[index] = this.guardarropa;
+          this.usuario.getUserLoggedIn().guardarropas[index] = this.guardarropa;
         }
       });
   }

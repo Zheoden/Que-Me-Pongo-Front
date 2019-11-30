@@ -58,14 +58,14 @@ export class EventoComponent implements OnInit {
 
   public agregarEvento() {
     this.eventService
-      .addEvento(this.usuario.user.id, {
+      .addEvento(this.usuario.getUserLoggedIn().id, {
         nombre: this.currentEvent.nombre,
         fecha: this.formatDate(this.currentEvent.fecha),
         ciudad: this.currentEvent.ciudad
       })
       .then((eventos: Evento[]) => {
         this.eventos = eventos;
-        this.usuario.user.eventos = this.eventos;
+        this.usuario.getUserLoggedIn().eventos = this.eventos;
       });
   }
 

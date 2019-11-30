@@ -10,11 +10,11 @@ export class GuardarropaService extends ApiService {
     }
 
     public async getGuardarropasById(id: string): Promise<Guardarropa> {
-        return Promise.resolve(this.usuario.user.guardarropas.find( (elem) => elem.id.toString() === id));
+        return Promise.resolve(this.usuario.getUserLoggedIn().guardarropas.find( (elem) => elem.id.toString() === id));
     }
 
     public async getGuardarropas(): Promise<Guardarropa[]> {
-        return Promise.resolve(this.usuario.user.guardarropas);
+        return Promise.resolve(this.usuario.getUserLoggedIn().guardarropas);
     }
 
     public addPrenda(idUsuario: string, idGuardarropa: string, prenda: Prenda): Promise<Guardarropa> {

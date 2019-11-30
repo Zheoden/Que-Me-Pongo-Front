@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UsuarioGlobal } from '../usuario/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -8,8 +10,10 @@ import { Component } from '@angular/core';
 
 export class LayoutComponent {
 
-  logout() {
+  constructor(private router: Router, private usuario: UsuarioGlobal) {}
 
+  public logout(): void {
+    this.usuario.logOut();
+    this.router.navigate(['/login']);
   }
-
 }
