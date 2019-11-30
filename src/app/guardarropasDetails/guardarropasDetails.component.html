@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <ng-container *ngFor="let prenda of prendas">
-            <tr class="cursor-pointer">
+            <tr class="cursor-pointer" [tooltip]="transformToImage(prenda.imagen)" placement="right" show-delay="500">
               <td class="no-mobile" data-label="Id">{{prenda.id}}</td>
               <td class="no-mobile" data-label="Nombre">{{prenda.nombre}}</td>
               <td data-label="Tipo Prenda">{{prenda.tipo}}</td>
@@ -74,6 +74,19 @@
             <option value="" disabled>Seleccione el color secundario</option>
             <option *ngFor="let color of colores" [value]="color"> {{ color }}</option>
           </select>
+          <div *ngIf="!isUploaded; else not_uploaded" class="dropbox mx-auto">
+            <input id='file-input' type="file" class="mx-auto input-file" accept="image/*" (change)="fileChange($event.target.files)">
+            <p>
+              <i class="fas fa-upload fa-5x d-flex py-3 justify-content-center"></i>
+              Seleccione una imagen para su prenda
+            </p>
+          </div>
+          <ng-template #not_uploaded>
+            <div class="form-control">
+              <p class="d-inline-block">{{currentFile && currentFile.name}}</p>
+              <span class="currentFile float-right link" (click)="reset()">Remover</span>
+            </div>
+          </ng-template>
         </div>
       </div>
       <div class="modal-footer">

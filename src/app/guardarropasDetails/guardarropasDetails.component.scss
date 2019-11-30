@@ -1,0 +1,22 @@
+.input-file {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.dropbox {
+    border: 2px dashed black;
+    position: relative;
+    border-radius: 10px;
+    p {
+        text-align: center;
+    }
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+}

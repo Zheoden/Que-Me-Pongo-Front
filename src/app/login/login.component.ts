@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   public validate = false;
   public required = false;
   public validateEmail: boolean;
+  public loading = false;
 
   constructor(private userService: UserService, private router: Router, private usuario: UsuarioGlobal) {}
 
@@ -45,16 +46,23 @@ export class LoginComponent implements OnInit {
   }
 
   public onLogin() {
+    this.loading = true;
     return this.userService
       .validateLogin(this.username, this.password)
       .then((user: Usuario) => {
+        this.loading = false;
         this.usuario.setUserLoggedIn(user);
         this.router.navigate(['/eventos']);
       })
       .catch(error => {
+        this.loading = false;
         this.validate = true;
         console.log(error);
       });
+  }
+
+  public toggleEye() {
+    this.typePassword = this.typePassword === 'password' ? 'text' : 'password';
   }
 }
 

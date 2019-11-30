@@ -6,6 +6,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 import { UsuarioGlobal } from './usuario/user';
 
@@ -50,7 +51,8 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FullCalendarModule
+    FullCalendarModule,
+    TooltipModule
   ],
   providers: [UsuarioGlobal,
     UserService,

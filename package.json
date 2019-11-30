@@ -32,6 +32,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "mariadb": "^2.1.2",
+    "ng2-tooltip-directive": "^2.8.17",
     "popper": "^1.0.1",
     "popper.js": "^1.15.0",
     "rxjs": "~6.4.0",

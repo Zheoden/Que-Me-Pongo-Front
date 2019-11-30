@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Guardarropa, Prenda } from '../modelo/interfaces';
 import { GuardarropaService } from '../api/guardarropaService';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { UsuarioGlobal } from '../usuario/user';
 
 @Component({
@@ -17,16 +17,20 @@ export class GuardarropasDetailsComponent implements OnInit {
     tipo: '',
     material: '',
     color_primario: '',
+    color_secundario: '',
     enUso: false,
     guardarropas: [],
-    atuendos: []
+    atuendos: [],
+    imagen: ''
   };
   public currentId: string;
+  public currentFile: File;
+  public isUploaded = false;
 
   constructor(
     private guardarropaService: GuardarropaService,
     private route: ActivatedRoute,
-    private usuario: UsuarioGlobal,
+    private usuario: UsuarioGlobal
   ) {}
 
   public async ngOnInit() {
@@ -118,6 +122,10 @@ export class GuardarropasDetailsComponent implements OnInit {
     ];
   }
 
+  public transformToImage(base64: string) {
+    return `<img height=70 width=70 src="${base64}">`;
+  }
+
   public limpiarPrenda() {
     this.currentPrenda.nombre = '';
     this.currentPrenda.tipo = '';
@@ -128,9 +136,15 @@ export class GuardarropasDetailsComponent implements OnInit {
 
   public agregarPrenda() {
     this.guardarropaService
-      .addPrenda(this.usuario.getUserLoggedIn().id, this.guardarropa.id, this.currentPrenda)
-      .then((guardarropa) => {
-        const index = this.usuario.getUserLoggedIn().guardarropas.indexOf(this.guardarropa);
+      .addPrenda(
+        this.usuario.getUserLoggedIn().id,
+        this.guardarropa.id,
+        this.currentPrenda
+      )
+      .then(guardarropa => {
+        const index = this.usuario
+          .getUserLoggedIn()
+          .guardarropas.indexOf(this.guardarropa);
         this.guardarropa = guardarropa;
         if (index !== -1) {
           this.usuario.getUserLoggedIn().guardarropas[index] = this.guardarropa;
@@ -146,5 +160,28 @@ export class GuardarropasDetailsComponent implements OnInit {
     this.guardarropaService
       .deletePrenda(this.guardarropa.id, this.currentId)
       .then(guardarropa => (this.guardarropa = guardarropa));
+  }
+
+  public fileChange(fileList: FileList) {
+    const fileInput = document.getElementById('file-input') as HTMLElement;
+    if (fileInput) {
+      this.isUploaded = true;
+      this.currentFile = fileList[0];
+      const read = new FileReader();
+      read.onload = this._handleReaderLoaded.bind(this);
+      read.readAsDataURL(this.currentFile);
+    }
+  }
+
+  public reset() {
+    this.currentFile = undefined;
+    this.currentPrenda.imagen = '';
+    this.isUploaded = false;
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    this.currentPrenda.imagen = readerEvt.target.result;
+    this.guardarropa.prendas[0].imagen = this.currentPrenda.imagen;
+
   }
 }

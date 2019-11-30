@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsuarioGlobal } from '../usuario/user';
 import { Router } from '@angular/router';
 
@@ -8,9 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./layout.component.scss'],
 })
 
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
 
   constructor(private router: Router, private usuario: UsuarioGlobal) {}
+
+  public ngOnInit() {
+    if (!this.usuario.getUserLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
+  }
 
   public logout(): void {
     this.usuario.logOut();

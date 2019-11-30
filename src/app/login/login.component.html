@@ -4,8 +4,12 @@
             <span *ngIf="validate" class="text-danger mb-2"> El usuario o la contraseña son incorrectos</span>
             <input class="form-control mb-3" type="text" placeholder="Ingrese su usuario" [(ngModel)]="username" (ngModelChange)="userChange()" />
             <span><p *ngIf="validateEmail" style="color: red;">Email invalido</p></span>
-            <input class="form-control mb-3 eye-normal" [type]="typePassword" placeholder="Ingrese su contraseña" [(ngModel)]="password" (ngModelChange)="passChange()" />
-            <button class="btn btn-primary w-100" (click)="onLogin()" [disabled]="!required"> Ingresar </button>
+            <input class="form-control" [type]="typePassword" placeholder="Ingrese su contraseña" [(ngModel)]="password" (ngModelChange)="passChange()"/>
+            <i class="eye mr-3 fas fa-eye float-right" [ngClass]="{'fa-eye-slash': this.typePassword === 'password'}" (click)="toggleEye()"></i>
+            <div *ngIf="loading;else no_loading" class="loader mx-auto mt-3"></div>
+            <ng-template #no_loading>
+                <button class="btn btn-primary w-100" (click)="onLogin()" [disabled]="!required"> Ingresar </button>
+            </ng-template>            
         </div>
     </div>
 </div>

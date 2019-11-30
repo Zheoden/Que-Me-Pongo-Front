@@ -20,6 +20,7 @@ export interface Prenda {
   enUso: boolean;
   guardarropas: Guardarropa[];
   atuendos: Prenda[];
+  imagen: string;
 }
 
 export interface Guardarropa {
