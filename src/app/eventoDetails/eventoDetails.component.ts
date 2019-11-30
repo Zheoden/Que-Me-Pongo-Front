@@ -34,14 +34,16 @@ export class EventoDetailsComponent implements OnInit {
   }
 
   public aceptarAtuendo() {
-    const index = this.usuario.getUserLoggedIn().eventos.indexOf(this.evento);
-    if (index !== -1) {
-      const aux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
-      const indexAux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.indexOf(aux);
+      const aux = this.evento.atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
+      const indexAux = this.evento.atuendosSugeridos.indexOf(aux);
       if (indexAux !== -1) {
         this.eventService.aceptarAtuendo(this.currentAtuendoId)
-        .then( (atuendo) => this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos[indexAux] = atuendo );
-      }
+        .then( (atuendo) => {
+          this.evento.atuendosSugeridos[indexAux] = atuendo;
+          const index = this.usuario.getUserLoggedIn().eventos.findIndex( (e) => e.id === this.evento.id);
+          this.usuario.user.eventos[index] = this.evento;
+          this.usuario.setUserLoggedIn(this.usuario.user);
+        });
     }
   }
 
