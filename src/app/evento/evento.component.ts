@@ -12,7 +12,7 @@ import { UsuarioGlobal } from '../usuario/user';
 export class EventoComponent implements OnInit {
   public eventos: Evento[];
   public eventoId: string;
-  public validDate:  boolean;
+  public validDate: boolean;
   public currentEvent: Evento = {
     id: '',
     nombre: '',
@@ -38,9 +38,8 @@ export class EventoComponent implements OnInit {
     );
   }
 
-  public onEventChangeDate()
-  {
-   this.validDate = (this.currentEvent.fecha <= new Date());
+  public onEventChangeDate() {
+    this.validDate = this.currentEvent.fecha <= new Date();
   }
 
   public async ngOnInit() {
@@ -49,7 +48,6 @@ export class EventoComponent implements OnInit {
       .then((eventos: Evento[]) => (this.eventos = eventos));
   }
 
-  
   public goToDetailEvent(id: string) {
     this.router.navigate(['/eventos/' + id]);
   }
@@ -63,7 +61,7 @@ export class EventoComponent implements OnInit {
       .addEvento(this.usuario.user.id, {
         nombre: this.currentEvent.nombre,
         fecha: this.formatDate(this.currentEvent.fecha),
-        ciudad: this.currentEvent.ciudad,
+        ciudad: this.currentEvent.ciudad
       })
       .then((eventos: Evento[]) => {
         this.eventos = eventos;
@@ -75,31 +73,30 @@ export class EventoComponent implements OnInit {
     const date = new Date(d);
     const aaaa = date.getFullYear();
     let gg: any = date.getDate();
-    let mm: any = (date.getMonth() + 1);
+    let mm: any = date.getMonth() + 1;
 
     if (gg < 10) {
-        gg = '0' + gg;
+      gg = '0' + gg;
     }
     if (mm < 10) {
-        mm = '0' + mm;
+      mm = '0' + mm;
     }
     const curDay = aaaa + '-' + mm + '-' + gg;
 
-    let hours: any = date.getHours()
-    let minutes: any = date.getMinutes()
+    let hours: any = date.getHours();
+    let minutes: any = date.getMinutes();
     let seconds: any = date.getSeconds();
 
     if (hours < 10) {
-        hours = '0' + hours;
+      hours = '0' + hours;
     }
     if (minutes < 10) {
-        minutes = '0' + minutes;
+      minutes = '0' + minutes;
     }
     if (seconds < 10) {
-        seconds = '0' + seconds;
+      seconds = '0' + seconds;
     }
     return curDay + ' ' + hours + ':' + minutes + ':' + seconds;
-
   }
 
   public limpiarEvento() {
