@@ -54,3 +54,7 @@ export interface EventoPayload {
   fecha: string;
 }
 
+export interface Data {
+  id: string;
+  nombre: string;
+}

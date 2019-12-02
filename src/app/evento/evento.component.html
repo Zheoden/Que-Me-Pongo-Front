@@ -19,7 +19,7 @@
                             <td class="no-mobile" (click)="goToDetailEvent(evento.id)" data-label="Ciudad">{{evento.ciudad}}</td>
                             <td class="no-mobile" (click)="goToDetailEvent(evento.id)" data-label="Fecha">
                                 {{ evento.fecha.toLocaleString() }}</td>
-                            <td data-label=""><button type="button" class="m-auto a-link text-white" data-toggle="modal" data-target="#BorrarModal" (click)="borrarEvento(evento.id)">Borrar</button></td>
+                            <td data-label=""><button type="button" class="m-auto a-link text-white" data-toggle="modal" data-target="#BorrarModal" (click)="setEvento(evento.id)">Borrar</button></td>
                         </tr>
                     </ng-container>
                 </tbody>
@@ -74,7 +74,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Borrar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="borrarEvento()">Borrar</button>
             </div>
         </div>
     </div>

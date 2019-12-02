@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioGlobal } from '../usuario/user';
 import { Router } from '@angular/router';
+import { UserService } from '../api/userService';
 
 @Component({
   selector: 'app-layout',
@@ -10,11 +11,13 @@ import { Router } from '@angular/router';
 
 export class LayoutComponent implements OnInit {
 
-  constructor(private router: Router, private usuario: UsuarioGlobal) {}
+  constructor(private router: Router, private usuario: UsuarioGlobal, private userService: UserService) {}
 
-  public ngOnInit() {
+  public async ngOnInit() {
     if (!this.usuario.getUserLoggedIn()) {
       this.router.navigate(['/login']);
+    } else {
+      this.usuario.setUserLoggedIn(await this.userService.getUserById(this.usuario.getUserLoggedIn().id));
     }
   }
 

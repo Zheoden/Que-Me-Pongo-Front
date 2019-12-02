@@ -26,19 +26,20 @@ export class LoginComponent implements OnInit {
 
   public async ngOnInit() {
     if (this.usuario.getUserLoggedIn()) {
+      this.usuario.setUserLoggedIn(await this.userService.getUserById(this.usuario.getUserLoggedIn().id));
       this.router.navigate(['/eventos']);
     }
   }
 
   public userChange() {
     if (this.username.includes('@')) {
-    const regexp = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$');
-    this.validateEmail = !regexp.test(this.username);
-    this.required = Boolean(this.validateEmail);
+      const regexp = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$');
+      this.validateEmail = !regexp.test(this.username);
+      this.required = Boolean(this.validateEmail);
     } else {
-    this.validateEmail = false;
+      this.validateEmail = false;
     }
-    this.required = Boolean(this.username && this.password  );
+    this.required = Boolean(this.username && this.password);
   }
 
   public passChange() {

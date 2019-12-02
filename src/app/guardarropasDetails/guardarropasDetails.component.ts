@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Guardarropa, Prenda } from '../modelo/interfaces';
+import { Guardarropa, Prenda, Data } from '../modelo/interfaces';
 import { GuardarropaService } from '../api/guardarropaService';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioGlobal } from '../usuario/user';
+import { UserService } from '../api/userService';
+import { upperCaseFirstLetter, lowerCaseAllWordsExceptFirstLetters } from '../modelo/utils';
 
 @Component({
   selector: 'app-guardarropas-details',
@@ -26,17 +28,23 @@ export class GuardarropasDetailsComponent implements OnInit {
   public currentId: string;
   public currentFile: File;
   public isUploaded = false;
+  public color: Data[];
+  public tipoPrenda: Data[];
+  public material: Data[];
 
   constructor(
     private guardarropaService: GuardarropaService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private usuario: UsuarioGlobal
   ) {}
 
-  public async ngOnInit() {
-    this.guardarropaService
-      .getGuardarropasById(this.route.snapshot.paramMap.get('id'))
+  public ngOnInit() {
+    this.guardarropaService.getGuardarropasById(this.route.snapshot.paramMap.get('id'))
       .then((guardarropa: Guardarropa) => (this.guardarropa = guardarropa));
+    this.userService.getColores().then( (response) => this.color = response);
+    this.userService.getTipoPrendas().then( (response) => this.tipoPrenda = response);
+    this.userService.getMateriales().then( (response) => this.material = response);
   }
 
   public get prendaValida() {
@@ -57,69 +65,15 @@ export class GuardarropasDetailsComponent implements OnInit {
   }
 
   public get colores() {
-    return [
-      'BLANCO',
-      'NEGRO',
-      'AZUL',
-      'ROJO',
-      'VERDE',
-      'AMARILLO',
-      'VIOLETA',
-      'ROSA',
-      'SALMON',
-      'MARRON',
-      'GRIS',
-      'NARANJA',
-      'CELESTE',
-      'BORDO',
-      'BEIGE',
-      'CAQUI',
-      'CARMESI',
-      'TURQUESA'
-    ];
+    return this.color.map( (elem) => upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(elem.nombre)));
   }
 
   public get tipoPrendas() {
-    return [
-      'BUZO',
-      'CAMISA',
-      'CAMPERA',
-      'REMERACORTA',
-      'REMERALARGA',
-      'SWEATER',
-      'ZAPATILLAS',
-      'ZAPATOS',
-      'ZAPATOSDETACON',
-      'OJOTAS',
-      'BERMUDAS',
-      'MEDIAS',
-      'CALZAS',
-      'PANTALON',
-      'POLLERA',
-      'SHORTS',
-      'ANTEOJOS',
-      'BUFANDA',
-      'GORRA',
-      'GUANTES',
-      'COLLAR',
-      'LENTES',
-      'AROS'
-    ];
+    return this.tipoPrenda.map( (elem) => upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(elem.nombre)));
   }
 
   public get materiales() {
-    return [
-      'ALGODON',
-      'CUERO',
-      'GABARDINA',
-      'JEAN',
-      'LINO',
-      'LYCRA',
-      'OXFORD',
-      'POLAR',
-      'SEDA',
-      'TERCIOPELO'
-    ];
+    return this.material.map( (elem) => upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(elem.nombre)));
   }
 
   public transformToImage(base64: string) {
@@ -182,6 +136,5 @@ export class GuardarropasDetailsComponent implements OnInit {
   _handleReaderLoaded(readerEvt) {
     this.currentPrenda.imagen = readerEvt.target.result;
     this.guardarropa.prendas[0].imagen = this.currentPrenda.imagen;
-
   }
 }

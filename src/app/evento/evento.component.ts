@@ -52,8 +52,15 @@ export class EventoComponent implements OnInit {
     this.router.navigate(['/eventos/' + id]);
   }
 
-  public borrarEvento(id: string) {
+  public setEvento(id: string) {
     this.eventoId = id;
+  }
+
+  public borrarEvento() {
+    this.eventService.deleteEventoById(this.eventoId).then( (eventos: Evento[]) => {
+      this.eventos = eventos;
+      this.usuario.getUserLoggedIn().eventos = this.eventos;
+    });
   }
 
   public agregarEvento() {

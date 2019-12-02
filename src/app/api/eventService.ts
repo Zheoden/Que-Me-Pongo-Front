@@ -13,6 +13,10 @@ export class EventService extends ApiService {
     return Promise.resolve(this.usuario.getUserLoggedIn().eventos.find( (elem) => elem.id.toString() === id));
   }
 
+  public async deleteEventoById(id: string): Promise<Evento[]> {
+    return this.delete(`/users/${this.usuario.getUserLoggedIn().id}/eventos/${id}/eliminarEvento`).then((response) => response.data);
+  }
+
   public async getEventos(): Promise<Evento[]> {
     return Promise.resolve(this.usuario.getUserLoggedIn().eventos);
   }
