@@ -4,7 +4,7 @@ import { GuardarropaService } from '../api/guardarropaService';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioGlobal } from '../usuario/user';
 import { UserService } from '../api/userService';
-import { upperCaseFirstLetter, lowerCaseAllWordsExceptFirstLetters } from '../modelo/utils';
+import { formatString } from '../modelo/utils';
 
 @Component({
   selector: 'app-guardarropas-details',
@@ -31,6 +31,7 @@ export class GuardarropasDetailsComponent implements OnInit {
   public color: Data[];
   public tipoPrenda: Data[];
   public material: Data[];
+  public formatString = (cadena) => formatString(cadena);
 
   constructor(
     private guardarropaService: GuardarropaService,
@@ -65,15 +66,15 @@ export class GuardarropasDetailsComponent implements OnInit {
   }
 
   public get colores() {
-    return this.color.map( (elem) => upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(elem.nombre)));
+    return this.color && this.color.map( (elem) => elem.nombre);
   }
 
   public get tipoPrendas() {
-    return this.tipoPrenda.map( (elem) => upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(elem.nombre)));
+    return this.tipoPrenda && this.tipoPrenda.map( (elem) => elem.nombre);
   }
 
   public get materiales() {
-    return this.material.map( (elem) => upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(elem.nombre)));
+    return this.material && this.material.map( (elem) => elem.nombre);
   }
 
   public transformToImage(base64: string) {
@@ -96,12 +97,11 @@ export class GuardarropasDetailsComponent implements OnInit {
         this.currentPrenda
       )
       .then(guardarropa => {
-        const index = this.usuario
-          .getUserLoggedIn()
-          .guardarropas.indexOf(this.guardarropa);
+        const index = this.usuario.getUserLoggedIn().guardarropas.indexOf(this.guardarropa);
         this.guardarropa = guardarropa;
         if (index !== -1) {
-          this.usuario.getUserLoggedIn().guardarropas[index] = this.guardarropa;
+          this.usuario.user.guardarropas[index] = this.guardarropa;
+          this.usuario.setUserLoggedIn(this.usuario.user);
         }
       });
   }

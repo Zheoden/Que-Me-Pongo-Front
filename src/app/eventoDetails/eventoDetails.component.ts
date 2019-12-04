@@ -55,9 +55,16 @@ export class EventoDetailsComponent implements OnInit {
       const indexAux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.indexOf(aux);
       if (indexAux !== -1) {
         this.eventService.calificarAtuendo(this.usuario.getUserLoggedIn().id, this.currentAtuendoId, this.currentCalificacion).
-          then( (atuendo) => this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos[indexAux] = atuendo );
+          then( (atuendo) => {
+            this.usuario.user.eventos[index].atuendosSugeridos[indexAux] = atuendo;
+            this.usuario.setUserLoggedIn(this.usuario.user);
+          });
       }
     }
+  }
+
+  public sePuedeAceptarEventos() {
+    return this.atuendosSugeridos.every( (element) => !element.aceptado);
   }
 
   public limpiarCalificacion() {

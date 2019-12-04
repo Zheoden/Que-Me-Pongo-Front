@@ -15,16 +15,28 @@
         </thead>
         <tbody>
           <ng-container *ngFor="let prenda of prendas">
-            <tr class="cursor-pointer" [tooltip]="transformToImage(prenda.imagen)" placement="right" show-delay="500">
+            <tr *ngIf="prenda.imagen; else no_image" class="cursor-pointer" [tooltip]="transformToImage(prenda.imagen)" placement="right" show-delay="500">
               <td class="no-mobile" data-label="Id">{{prenda.id}}</td>
-              <td class="no-mobile" data-label="Nombre">{{prenda.nombre}}</td>
-              <td data-label="Tipo Prenda">{{prenda.tipo}}</td>
-              <td data-label="Material">{{prenda.material}}</td>
-              <td data-label="Color">{{prenda.color_primario}}</td>
+              <td class="no-mobile" data-label="Nombre">{{ formatString(prenda.nombre) }}</td>
+              <td data-label="Tipo Prenda">{{ formatString(prenda.tipo) }}</td>
+              <td data-label="Material">{{ formatString(prenda.material) }}</td>
+              <td data-label="Color">{{ formatString(prenda.color_primario) }}</td>
               <td class="no-mobile" data-label="En Uso">{{prenda.enUso ? 'Si' : 'No'}}</td>
               <td data-label=""><button type="button" class="m-auto a-link text-white" data-toggle="modal"
                   data-target="#BorrarPrendaModal" (click)="setIdPrenda(prenda.id)">Borrar</button></td>
             </tr>
+            <ng-template #no_image>
+              <tr class="cursor-pointer">
+                <td class="no-mobile" data-label="Id">{{prenda.id}}</td>
+                <td class="no-mobile" data-label="Nombre">{{ formatString(prenda.nombre) }}</td>
+                <td data-label="Tipo Prenda">{{ formatString(prenda.tipo) }}</td>
+                <td data-label="Material">{{ formatString(prenda.material) }}</td>
+                <td data-label="Color">{{ formatString(prenda.color_primario) }}</td>
+                <td class="no-mobile" data-label="En Uso">{{prenda.enUso ? 'Si' : 'No'}}</td>
+                <td data-label=""><button type="button" class="m-auto a-link text-white" data-toggle="modal"
+                    data-target="#BorrarPrendaModal" (click)="setIdPrenda(prenda.id)">Borrar</button></td>
+              </tr>
+            </ng-template>
           </ng-container>
         </tbody>
       </table>
@@ -60,19 +72,19 @@
             [(ngModel)]="currentPrenda.nombre" />
           <select class="form-control mb-3" [(ngModel)]="currentPrenda.tipo">
             <option value="" disabled>Seleccione el tipo de prenda</option>
-            <option *ngFor="let tipo of tipoPrendas" [value]="tipo"> {{ tipo }}</option>
+            <option *ngFor="let tipo of tipoPrendas" [value]="tipo"> {{ formatString(tipo) }}</option>
           </select>
           <select class="form-control mb-3" [(ngModel)]="currentPrenda.material">
             <option value="" disabled>Seleccione el Material</option>
-            <option *ngFor="let material of materiales" [value]="material"> {{ material }}</option>
+            <option *ngFor="let material of materiales" [value]="material"> {{ formatString(material) }}</option>
           </select>
           <select class="form-control mb-3" [(ngModel)]="currentPrenda.color_primario">
             <option value="" disabled>Seleccione el color</option>
-            <option *ngFor="let color of colores" [value]="color"> {{ color }}</option>
+            <option *ngFor="let color of colores" [value]="color"> {{ formatString(color) }}</option>
           </select>
           <select class="form-control mb-3" [(ngModel)]="currentPrenda.color_secundario">
             <option value="" disabled>Seleccione el color secundario</option>
-            <option *ngFor="let color of colores" [value]="color"> {{ color }}</option>
+            <option *ngFor="let color of colores" [value]="color"> {{ formatString(color) }}</option>
           </select>
           <div *ngIf="!isUploaded; else not_uploaded" class="dropbox mx-auto">
             <input id='file-input' type="file" class="mx-auto input-file" accept="image/*" (change)="fileChange($event.target.files)">

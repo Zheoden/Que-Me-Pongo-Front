@@ -7,3 +7,7 @@ export function lowerCaseAllWordsExceptFirstLetters(cadena: string) {
     return word.charAt(0) + word.slice(1).toLowerCase();
   });
 }
+
+export function formatString(cadena: string) {
+  return upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(cadena));
+}

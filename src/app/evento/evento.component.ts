@@ -59,7 +59,8 @@ export class EventoComponent implements OnInit {
   public borrarEvento() {
     this.eventService.deleteEventoById(this.eventoId).then( (eventos: Evento[]) => {
       this.eventos = eventos;
-      this.usuario.getUserLoggedIn().eventos = this.eventos;
+      this.usuario.user.eventos = this.eventos;
+      this.usuario.setUserLoggedIn(this.usuario.user);
     });
   }
 
@@ -72,7 +73,8 @@ export class EventoComponent implements OnInit {
       })
       .then((eventos: Evento[]) => {
         this.eventos = eventos;
-        this.usuario.getUserLoggedIn().eventos = this.eventos;
+        this.usuario.user.eventos = this.eventos;
+        this.usuario.setUserLoggedIn(this.usuario.user);
       });
   }
 
