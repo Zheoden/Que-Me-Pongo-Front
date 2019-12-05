@@ -63,8 +63,8 @@ export class EventoDetailsComponent implements OnInit {
     }
   }
 
-  public sePuedeAceptarEventos() {
-    return this.atuendosSugeridos.every( (element) => !element.aceptado);
+  public get sePuedeAceptarEventos() {
+    return this.atuendosSugeridos.every( (element) => element.aceptado);
   }
 
   public limpiarCalificacion() {

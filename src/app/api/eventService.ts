@@ -26,11 +26,11 @@ export class EventService extends ApiService {
   }
 
   public async calificarAtuendo(userid: string, idAtuendo: string, puntuacion: number): Promise<Atuendo> {
-    return this.put(`/users/${userid}/atuendo/${idAtuendo}/calificarAtuendo/${puntuacion}`).then( (response) => response.data);
+    return this.post(`/users/${userid}/atuendo/${idAtuendo}/calificarAtuendo/${puntuacion}`).then( (response) => response.data);
   }
 
   public async aceptarAtuendo(idAtuendo: string): Promise<Atuendo> {
-    return this.put(`/atuendo/${idAtuendo}/aceptarSugerencia`).then( (response) => response.data);
+    return this.post(`/atuendo/${idAtuendo}/aceptarSugerencia`).then( (response) => response.data);
   }
 
   public async atuendosRecomendados(userId: string, eventId: string): Promise<Atuendo[]> {

@@ -22,12 +22,12 @@
               <td data-label="Calzado">{{parsePrenda(atuendo, calzado)}}</td>
               <td class="no-mobile" data-label="Aceptado">{{atuendo.aceptado ? 'Si' : 'No'}}</td>
               <td data-label=""><button type="button"
-                  class="m-auto a-link text-white" [ngClass]="{ 'text-black-50': sePuedeAceptarEventos()}" data-toggle="modal" data-target="#AceptarAtuendoModal"
-                  (click)="setIdAtuendo(atuendo.id)" [disabled]="sePuedeAceptarEventos()">Aceptar</button></td>
+                  class="m-auto a-link text-white" [ngClass]="{ 'text-black-50': sePuedeAceptarEventos}" data-toggle="modal" data-target="#AceptarAtuendoModal"
+                  (click)="setIdAtuendo(atuendo.id)" [disabled]="sePuedeAceptarEventos">Aceptar</button></td>
               <td class="no-mobile" data-label="">
-                <button *ngIf="!atuendo.calificacion && atuendo.aceptado; else no_calificacion" type="button" class="m-auto a-link text-white" data-toggle="modal" data-target="#calificarAtuendoModal" (click)="setIdAtuendo(atuendo.id)">Calificar</button>
+                <button *ngIf="atuendo.calificacion === -1 && atuendo.aceptado; else no_calificacion" type="button" class="m-auto a-link text-white" data-toggle="modal" data-target="#calificarAtuendoModal" (click)="setIdAtuendo(atuendo.id)">Calificar</button>
                 <ng-template #no_calificacion>
-                  <span>{{atuendo.calificacion}}</span>
+                  <span>{{atuendo.calificacion === -1 ? '-' : atuendo.calificacion }}</span>
                 </ng-template>
               </td>
             </tr>
