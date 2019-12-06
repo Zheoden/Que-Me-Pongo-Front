@@ -29,9 +29,6 @@ export class GuardarropasDetailsComponent implements OnInit {
   public currentId: string;
   public currentFile: File;
   public isUploaded = false;
-  public color: Data[];
-  public tipoPrenda: Data[];
-  public material: Data[];
   public formatString = (cadena) => formatString(cadena);
 
   constructor(
@@ -45,9 +42,6 @@ export class GuardarropasDetailsComponent implements OnInit {
   public ngOnInit() {
     this.guardarropaService.getGuardarropasById(this.route.snapshot.paramMap.get('id'))
       .then((guardarropa: Guardarropa) => (this.guardarropa = guardarropa));
-    this.userService.getColores().then( (response) => this.color = response);
-    this.userService.getTipoPrendas().then( (response) => this.tipoPrenda = response);
-    this.userService.getMateriales().then( (response) => this.material = response);
   }
 
   public get prendaValida() {
@@ -68,15 +62,15 @@ export class GuardarropasDetailsComponent implements OnInit {
   }
 
   public get colores() {
-    return this.color && this.color.map( (elem) => elem.nombre);
+    return this.usuario.getColores() && this.usuario.getColores().map( (elem) => elem.nombre);
   }
 
   public get tipoPrendas() {
-    return this.tipoPrenda && this.tipoPrenda.map( (elem) => elem.nombre);
+    return this.usuario.getTipoPrenda() && this.usuario.getTipoPrenda().map( (elem) => elem.nombre);
   }
 
   public get materiales() {
-    return this.material && this.material.map( (elem) => elem.nombre);
+    return this.usuario.getMateriales() && this.usuario.getMateriales().map( (elem) => elem.nombre);
   }
 
   public transformToImage(base64: string) {
@@ -146,6 +140,5 @@ export class GuardarropasDetailsComponent implements OnInit {
 
   _handleReaderLoaded(readerEvt) {
     this.currentPrenda.imagen = readerEvt.target.result;
-    this.guardarropa.prendas[0].imagen = this.currentPrenda.imagen;
   }
 }

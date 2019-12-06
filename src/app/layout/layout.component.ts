@@ -14,6 +14,9 @@ export class LayoutComponent implements OnInit {
   constructor(private router: Router, private usuario: UsuarioGlobal, private userService: UserService) {}
 
   public async ngOnInit() {
+    this.userService.getColores().then( (response) => this.usuario.setColores(response));
+    this.userService.getTipoPrendas().then( (response) => this.usuario.setTipoPrenda(response));
+    this.userService.getMateriales().then( (response) => this.usuario.setMateriales(response));
     if (!this.usuario.getUserLoggedIn()) {
       this.router.navigate(['/login']);
     } else {
