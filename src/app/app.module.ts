@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { UsuarioGlobal } from './usuario/user';
 
@@ -46,12 +48,14 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     AngularFontAwesomeModule,
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
+    FullCalendarModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FullCalendarModule,
+    ToastrModule.forRoot(),
     TooltipModule
   ],
   providers: [UsuarioGlobal,

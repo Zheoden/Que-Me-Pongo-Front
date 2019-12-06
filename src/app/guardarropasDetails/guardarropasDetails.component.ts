@@ -78,7 +78,7 @@ export class GuardarropasDetailsComponent implements OnInit {
   }
 
   public transformToImage(base64: string) {
-    return `<img height=70 width=70 src="${base64}">`;
+    return `<img height=70 width=70 src='${base64}'>`;
   }
 
   public limpiarPrenda() {
@@ -86,10 +86,13 @@ export class GuardarropasDetailsComponent implements OnInit {
     this.currentPrenda.tipo = '';
     this.currentPrenda.material = '';
     this.currentPrenda.color_primario = '';
-    this.currentPrenda.color_secundario = undefined;
+    this.currentPrenda.color_secundario = '';
   }
 
   public agregarPrenda() {
+    if (this.currentPrenda.color_secundario === '') {
+      this.currentPrenda.color_secundario = undefined;
+    }
     this.guardarropaService
       .addPrenda(
         this.usuario.getUserLoggedIn().id,
@@ -111,9 +114,11 @@ export class GuardarropasDetailsComponent implements OnInit {
   }
 
   public borrarPrenda() {
+    /*
     this.guardarropaService
       .deletePrenda(this.guardarropa.id, this.currentId)
       .then(guardarropa => (this.guardarropa = guardarropa));
+    */
   }
 
   public fileChange(fileList: FileList) {

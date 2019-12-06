@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
       .catch(error => {
         this.loading = false;
         this.validate = true;
-        console.log(error);
       });
   }
 
