@@ -15,8 +15,8 @@ export interface Prenda {
   nombre: string;
   tipo: string;
   material: string;
-  color_primario: string;
-  color_secundario?: string;
+  colorPrimario: string;
+  colorSecundario?: string;
   enUso: boolean;
   guardarropas: Guardarropa[];
   atuendos: Prenda[];

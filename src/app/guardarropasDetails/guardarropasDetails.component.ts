@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsuarioGlobal } from '../usuario/user';
 import { UserService } from '../api/userService';
 import { formatString } from '../modelo/utils';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-guardarropas-details',
@@ -18,8 +19,8 @@ export class GuardarropasDetailsComponent implements OnInit {
     nombre: '',
     tipo: '',
     material: '',
-    color_primario: '',
-    color_secundario: '',
+    colorPrimario: '',
+    colorSecundario: '',
     enUso: false,
     guardarropas: [],
     atuendos: [],
@@ -37,7 +38,8 @@ export class GuardarropasDetailsComponent implements OnInit {
     private guardarropaService: GuardarropaService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private usuario: UsuarioGlobal
+    private usuario: UsuarioGlobal,
+    private toastr: ToastrService
   ) {}
 
   public ngOnInit() {
@@ -53,7 +55,7 @@ export class GuardarropasDetailsComponent implements OnInit {
       this.currentPrenda.nombre &&
         this.currentPrenda.tipo &&
         this.currentPrenda.material &&
-        this.currentPrenda.color_primario
+        this.currentPrenda.colorPrimario
     );
   }
 
@@ -85,13 +87,13 @@ export class GuardarropasDetailsComponent implements OnInit {
     this.currentPrenda.nombre = '';
     this.currentPrenda.tipo = '';
     this.currentPrenda.material = '';
-    this.currentPrenda.color_primario = '';
-    this.currentPrenda.color_secundario = '';
+    this.currentPrenda.colorPrimario = '';
+    this.currentPrenda.colorSecundario = '';
   }
 
   public agregarPrenda() {
-    if (this.currentPrenda.color_secundario === '') {
-      this.currentPrenda.color_secundario = undefined;
+    if (this.currentPrenda.colorSecundario === '') {
+      this.currentPrenda.colorSecundario = undefined;
     }
     this.guardarropaService
       .addPrenda(
@@ -126,6 +128,10 @@ export class GuardarropasDetailsComponent implements OnInit {
     if (fileInput) {
       this.isUploaded = true;
       this.currentFile = fileList[0];
+      if (this.currentFile.size > 12000) {
+        this.toastr.error('El tamaño de la imagen es demasiado grande', 'Error', {positionClass: 'toast-bottom-center'});
+        this.reset();
+      }
       const read = new FileReader();
       read.onload = this._handleReaderLoaded.bind(this);
       read.readAsDataURL(this.currentFile);
