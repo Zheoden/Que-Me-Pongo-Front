@@ -102,12 +102,12 @@ export class GuardarropasDetailsComponent implements OnInit {
         this.currentPrenda
       )
       .then(guardarropa => {
-        const index = this.usuario.getUserLoggedIn().guardarropas.indexOf(this.guardarropa);
-        this.guardarropa = guardarropa;
-        if (index !== -1) {
-          this.usuario.user.guardarropas[index] = this.guardarropa;
-          this.usuario.setUserLoggedIn(this.usuario.user);
-        }
+        this.usuario.getUserLoggedIn().guardarropas.forEach( (elem, index) => {
+          if (elem.id.toString() === this.guardarropa.id.toString() && guardarropa.id.toString() === elem.id.toString()) {
+            this.guardarropa = guardarropa;
+            this.usuario.updateGuardarropa(index, guardarropa);
+          }
+        });
       });
   }
 
