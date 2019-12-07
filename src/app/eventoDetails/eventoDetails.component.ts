@@ -22,7 +22,12 @@ export class EventoDetailsComponent implements OnInit {
   public async ngOnInit() {
     this.loading = true;
     this.evento = await this.eventService.getEventosById(this.route.snapshot.paramMap.get('id'));
-    this.evento.atuendosMovimientos = await this.eventService.atuendosRecomendados(this.usuario.getUserLoggedIn().id, this.evento.id);
+    const indexAux = this.usuario.user.eventos.indexOf(this.evento);
+    if (indexAux !== -1) {
+      this.evento.atuendosMovimientos = await this.eventService.atuendosRecomendados(this.usuario.getUserLoggedIn().id, this.evento.id);
+      this.usuario.user.eventos[indexAux] = this.evento;
+      this.usuario.setUserLoggedIn(this.usuario.user);
+    }
     this.loading = false;
   }
 
