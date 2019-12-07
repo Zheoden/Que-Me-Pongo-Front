@@ -3,6 +3,7 @@ import { EventService } from '../api/eventService';
 import { Evento, Atuendo, Prenda } from '../modelo/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioGlobal } from '../usuario/user';
+import { formatString } from '../modelo/utils';
 
 @Component({
   selector: 'app-evento-details',
@@ -13,12 +14,17 @@ export class EventoDetailsComponent implements OnInit {
   public evento: Evento;
   public currentAtuendoId: string;
   public currentCalificacion: number;
+  public loading = false;
+  public formatString = (cadena: string) => formatString(cadena);
+
   constructor(private eventService: EventService, private route: ActivatedRoute, private usuario: UsuarioGlobal) { }
 
   public async ngOnInit() {
+    this.loading = true;
     await this.eventService.getEventosById(this.route.snapshot.paramMap.get('id')).then( (evento: Evento) => this.evento = evento);
-    this.eventService.atuendosRecomendados(this.usuario.getUserLoggedIn().id, this.evento.id)
+    await this.eventService.atuendosRecomendados(this.usuario.getUserLoggedIn().id, this.evento.id)
       .then( (atuendos: Atuendo[]) => this.evento.atuendosSugeridos = atuendos);
+    this.loading = false;
   }
 
   public get atuendosAceptados() {
@@ -34,37 +40,35 @@ export class EventoDetailsComponent implements OnInit {
   }
 
   public aceptarAtuendo() {
-      const aux = this.evento.atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
-      const indexAux = this.evento.atuendosSugeridos.indexOf(aux);
-      if (indexAux !== -1) {
-        this.eventService.aceptarAtuendo(this.currentAtuendoId)
-        .then( (atuendo) => {
-          this.evento.atuendosSugeridos[indexAux] = atuendo;
-          const index = this.usuario.getUserLoggedIn().eventos.findIndex( (e) => e.id === this.evento.id);
-          this.usuario.user.eventos[index] = this.evento;
-          this.usuario.setUserLoggedIn(this.usuario.user);
-        });
+    const aux = this.evento.atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
+    const indexAux = this.evento.atuendosSugeridos.indexOf(aux);
+    if (indexAux !== -1) {
+      this.eventService.aceptarAtuendo(this.currentAtuendoId)
+      .then( (atuendo) => {
+        this.evento.atuendosSugeridos[indexAux] = atuendo;
+        const index = this.usuario.getUserLoggedIn().eventos.findIndex( (e) => e.id === this.evento.id);
+        this.usuario.user.eventos[index] = this.evento;
+        this.usuario.setUserLoggedIn(this.usuario.user);
+      });
     }
   }
 
   public calificarAtuendo() {
-    console.log(this.currentCalificacion);
-    const index = this.usuario.getUserLoggedIn().eventos.indexOf(this.evento);
-    if (index !== -1) {
-      const aux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
-      const indexAux = this.usuario.getUserLoggedIn().eventos[index].atuendosSugeridos.indexOf(aux);
-      if (indexAux !== -1) {
-        this.eventService.calificarAtuendo(this.usuario.getUserLoggedIn().id, this.currentAtuendoId, this.currentCalificacion).
-          then( (atuendo) => {
-            this.usuario.user.eventos[index].atuendosSugeridos[indexAux] = atuendo;
-            this.usuario.setUserLoggedIn(this.usuario.user);
-          });
-      }
+    const aux = this.evento.atuendosSugeridos.find( (elem) => elem.id === this.currentAtuendoId);
+    const indexAux = this.evento.atuendosSugeridos.indexOf(aux);
+    if (indexAux !== -1) {
+      this.eventService.calificarAtuendo(this.usuario.getUserLoggedIn().id, this.currentAtuendoId, this.currentCalificacion)
+      .then( (atuendo) => {
+        this.evento.atuendosSugeridos[indexAux] = atuendo;
+        const index = this.usuario.getUserLoggedIn().eventos.findIndex( (e) => e.id === this.evento.id);
+        this.usuario.user.eventos[index] = this.evento;
+        this.usuario.setUserLoggedIn(this.usuario.user);
+      });
     }
   }
 
   public get sePuedeAceptarEventos() {
-    return this.atuendosSugeridos.every( (element) => element.aceptado);
+    return this.atuendosSugeridos.some( (element) => element.aceptado);
   }
 
   public limpiarCalificacion() {

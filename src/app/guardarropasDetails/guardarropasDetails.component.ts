@@ -29,7 +29,7 @@ export class GuardarropasDetailsComponent implements OnInit {
   public currentId: string;
   public currentFile: File;
   public isUploaded = false;
-  public formatString = (cadena) => formatString(cadena);
+  public formatString = (cadena: string) => formatString(cadena);
 
   constructor(
     private guardarropaService: GuardarropaService,

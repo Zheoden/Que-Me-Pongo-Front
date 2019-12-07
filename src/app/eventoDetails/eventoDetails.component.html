@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div *ngIf="atuendosSugeridos.length > 0 && !loading; else no_atuendos" class="row">
     <div class="col-12">
       <table class="table text-center main-table background-cheto text-white mt-5">
         <thead>
@@ -17,9 +17,9 @@
           <ng-container *ngFor="let atuendo of atuendosSugeridos">
             <tr>
               <td class="no-mobile" data-label="Id">{{atuendo.id}}</td>
-              <td data-label="Parte superior">{{parsePrenda(atuendo, partesSuperiores)}}</td>
-              <td data-label="Parte inferior">{{parsePrenda(atuendo, partesInferiores)}}</td>
-              <td data-label="Calzado">{{parsePrenda(atuendo, calzado)}}</td>
+              <td data-label="Parte superior">{{ formatString(parsePrenda(atuendo, partesSuperiores)) }}</td>
+              <td data-label="Parte inferior">{{ formatString(parsePrenda(atuendo, partesInferiores)) }}</td>
+              <td data-label="Calzado">{{ formatString(parsePrenda(atuendo, calzado)) }}</td>
               <td class="no-mobile" data-label="Aceptado">{{atuendo.aceptado ? 'Si' : 'No'}}</td>
               <td data-label=""><button type="button"
                   class="m-auto a-link text-white" [ngClass]="{ 'text-black-50': sePuedeAceptarEventos}" data-toggle="modal" data-target="#AceptarAtuendoModal"
@@ -36,6 +36,16 @@
       </table>
     </div>
   </div>
+  <ng-template #no_atuendos>
+    <div [ngClass]="{ 'row h-100': loading}">
+      <div *ngIf="loading;else no_loading" class="loader m-auto"></div>
+    </div>
+    <ng-template #no_loading>
+      <div class="d-flex flex-column background-cheto text-white p-5 w-75 mt-3 mx-auto">
+        <span class="m-auto text-center">En este momento no podemos generar atuendos para este evento. Vuelva a intentar mas tarde!</span>
+      </div>
+    </ng-template>
+  </ng-template>
 </div>
 
 <!-- Modal Calificar-->
