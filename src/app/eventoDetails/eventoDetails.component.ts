@@ -25,8 +25,10 @@ export class EventoDetailsComponent implements OnInit {
     const indexAux = this.usuario.user.eventos.indexOf(this.evento);
     if (indexAux !== -1) {
       this.evento.atuendosMovimientos = await this.eventService.atuendosRecomendados(this.usuario.getUserLoggedIn().id, this.evento.id);
-      this.usuario.user.eventos[indexAux] = this.evento;
-      this.usuario.setUserLoggedIn(this.usuario.user);
+      if (this.evento.atuendosMovimientos && this.evento.atuendosMovimientos.length > 0) {
+        this.usuario.user.eventos[indexAux] = this.evento;
+        this.usuario.setUserLoggedIn(this.usuario.user);
+      }
     }
     this.loading = false;
   }
