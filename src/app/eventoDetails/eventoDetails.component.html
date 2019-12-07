@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="atuendosSugeridos.length > 0 && !loading; else no_atuendos" class="row">
+  <div *ngIf="atuendosMovimientos.length > 0 && !loading; else no_atuendos" class="row">
     <div class="col-12">
       <table class="table text-center main-table background-cheto text-white mt-5">
         <thead>
@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let atuendo of atuendosSugeridos">
+          <ng-container *ngFor="let atuendo of atuendosMovimientos">
             <tr class="alto-tooltip" [tooltip]="getAtuendoFull(atuendo)" placement="bottom" show-delay="500" max-width="1500">
               <td class="no-mobile" data-label="Id">{{atuendo.id}}</td>
               <td data-label="Parte superior">{{ formatString(parsePrenda(atuendo, partesSuperiores)) }}</td>

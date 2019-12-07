@@ -18,7 +18,7 @@ export class EventoComponent implements OnInit {
     nombre: '',
     ciudad: '',
     fecha: null,
-    atuendosSugeridos: [],
+    atuendosMovimientos: [],
     atuendosAceptados: [],
     usuario: {} as any
   };
@@ -114,7 +114,7 @@ export class EventoComponent implements OnInit {
       nombre: '',
       ciudad: '',
       fecha: null,
-      atuendosSugeridos: [],
+      atuendosMovimientos: [],
       atuendosAceptados: [],
       usuario: {} as any
     };

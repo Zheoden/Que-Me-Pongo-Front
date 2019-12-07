@@ -35,7 +35,7 @@ export interface Evento {
   nombre: string;
   ciudad: string;
   fecha: Date;
-  atuendosSugeridos: Atuendo[];
+  atuendosMovimientos: Atuendo[];
   atuendosAceptados: Atuendo[];
   usuario: Usuario;
 }
