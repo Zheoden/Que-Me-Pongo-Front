@@ -4,6 +4,7 @@ import { Evento, Atuendo, Prenda } from '../modelo/interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { UsuarioGlobal } from '../usuario/user';
 import { formatString } from '../modelo/utils';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-evento-details',
@@ -17,14 +18,20 @@ export class EventoDetailsComponent implements OnInit {
   public loading = false;
   public formatString = (cadena: string) => formatString(cadena);
 
-  constructor(private eventService: EventService, private route: ActivatedRoute, private usuario: UsuarioGlobal) { }
+  constructor(
+    private eventService: EventService,
+    private route: ActivatedRoute,
+    private usuario: UsuarioGlobal,
+    private toastr: ToastrService) { }
 
   public async ngOnInit() {
     this.loading = true;
     this.evento = await this.eventService.getEventosById(this.route.snapshot.paramMap.get('id'));
     const indexAux = this.usuario.user.eventos.indexOf(this.evento);
     if (indexAux !== -1) {
-      this.evento.atuendosMovimientos = await this.eventService.atuendosRecomendados(this.usuario.getUserLoggedIn().id, this.evento.id);
+      await this.eventService.atuendosRecomendados(this.usuario.getUserLoggedIn().id, this.evento.id)
+        .then( (response) => this.evento.atuendosMovimientos = response)
+        .catch((error) => this.toastr.error(error.response.data, error.response.status, {positionClass: 'toast-bottom-center'}));
       if (this.evento.atuendosMovimientos && this.evento.atuendosMovimientos.length > 0) {
         this.usuario.user.eventos[indexAux] = this.evento;
         this.usuario.setUserLoggedIn(this.usuario.user);
