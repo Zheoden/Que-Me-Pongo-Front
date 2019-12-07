@@ -19,8 +19,6 @@ export class LayoutComponent implements OnInit {
     this.userService.getMateriales().then( (response) => this.usuario.setMateriales(response));
     if (!this.usuario.getUserLoggedIn()) {
       this.router.navigate(['/login']);
-    } else {
-      this.usuario.setUserLoggedIn(await this.userService.getUserById(this.usuario.getUserLoggedIn().id));
     }
   }
 
