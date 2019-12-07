@@ -35,6 +35,26 @@ export class EventoDetailsComponent implements OnInit {
     return this.evento && this.evento.atuendosSugeridos || [];
   }
 
+  public get sePuedeAceptarEventos() {
+    return this.atuendosSugeridos.some( (element) => element.aceptado);
+  }
+
+  public get partesSuperiores() {
+    return ['BUZO', 'CAMISA', 'CAMPERA', 'MUSCULOSA', 'REMERACORTA', 'REMERALARGA', 'SWEATER'];
+  }
+
+  public get partesInferiores() {
+    return ['BERMUDAS', 'CALZAS', 'PANTALONLARGO', 'PANTALONCORTO', 'POLLERA', 'SHORTS'];
+  }
+
+  public get calzado() {
+    return ['ZAPATILLAS', 'ZAPATOS', 'ZAPATOSDETACON', 'OJOTAS', 'MEDIAS'];
+  }
+
+  public get accesorios() {
+    return [ 'ANTEOJOS', 'BUFANDA', 'GORRA', 'GUANTES', 'COLLAR', 'LENTES', 'AROS'];
+  }
+
   public setIdAtuendo(id: string) {
     this.currentAtuendoId = id;
   }
@@ -67,32 +87,19 @@ export class EventoDetailsComponent implements OnInit {
     }
   }
 
-  public get sePuedeAceptarEventos() {
-    return this.atuendosSugeridos.some( (element) => element.aceptado);
-  }
-
   public limpiarCalificacion() {
     this.currentCalificacion = undefined;
   }
-
-  public get partesSuperiores() {
-    return ['BUZO', 'CAMISA', 'CAMPERA', 'REMERACORTA', 'REMERALARGA', 'SWEATER'];
-  }
-
-  public get partesInferiores() {
-    return ['BERMUDAS', 'CALZAS', 'PANTALON', 'POLLERA', 'SHORTS'];
-  }
-
-  public get calzado() {
-    return ['ZAPATILLAS', 'ZAPATOS', 'ZAPATOSDETACON', 'OJOTAS', 'MEDIAS'];
-  }
-
-  public get accesorios() {
-    return [ 'ANTEOJOS', 'BUFANDA', 'GORRA', 'GUANTES', 'COLLAR', 'LENTES', 'AROS'];
-  }
-
   public parsePrenda(atuendo: Atuendo, array) {
     return atuendo.prendas.find( (elem) => array.includes(elem.tipo)).tipo;
+  }
+
+  public getAtuendoFull(atuendo: Atuendo): string {
+    let atuendoFull = '';
+    atuendo.prendas.forEach( (prenda) => atuendoFull += `<span>Nombre: ${prenda.nombre}, Tipo: ${prenda.tipo}, ` +
+      `Material: ${prenda.material}, Color Primario: ${prenda.colorPrimario}, ` +
+      `Color Secundario: ${prenda.colorSecundario || 'N/A'}, En uso: ${prenda.enUso}</br></span>`);
+    return atuendoFull;
   }
 }
 

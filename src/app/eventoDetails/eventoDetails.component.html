@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <ng-container *ngFor="let atuendo of atuendosSugeridos">
-            <tr>
+            <tr class="alto-tooltip" [tooltip]="getAtuendoFull(atuendo)" placement="bottom" show-delay="500" max-width="1500">
               <td class="no-mobile" data-label="Id">{{atuendo.id}}</td>
               <td data-label="Parte superior">{{ formatString(parsePrenda(atuendo, partesSuperiores)) }}</td>
               <td data-label="Parte inferior">{{ formatString(parsePrenda(atuendo, partesInferiores)) }}</td>
